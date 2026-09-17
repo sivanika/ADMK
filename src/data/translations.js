@@ -3,12 +3,13 @@ export const translations = {
     siteMotto: "மக்கள் நலனே எங்கள் முதன்மை",
     nav: {
       home: "முகப்பு",
+      about: "வாழ்க்கை வரலாறு",
       mla: "கழக செயலாளர்",
       news: "செய்திகள்",
       events: "நிகழ்வுகள்",
       activities: "களப்பணிகள்",
-      services: "மக்கள் சேவைகள்",
-      contact: "தொடர்பு கொள்ள",
+      services: "சேவைகள்",
+      contact: "தொடர்புக்கு",
       searchPlaceholder: "சேவைகள், செய்திகளைத் தேடுக...",
     },
     hero: {
@@ -17,9 +18,7 @@ export const translations = {
       role: "மாவட்ட கழக செயலாளர் | முன்னாள் ஆவின் தலைவர்",
       constituency: "திருச்சி மாநகர் மாவட்டம் - தமிழ்நாடு",
       pillars: [
-        "மக்கள் நலனில் அக்கறை",
-        "வளர்ச்சியில் உறுதி",
-        "நம் திருச்சி, நம் பொறுப்பு"
+        "நம்ம திருச்சி நம்ம வளர்ச்சி"
       ],
       quote: "“மக்களின் நலனே என் பணியின் மையம்”",
       buildingTitle: "தமிழ்நாடு சட்டமன்றம்",
@@ -31,6 +30,24 @@ export const translations = {
       items: [
         {
           id: 1,
+          date: "16 செப் 2025",
+          title: "“தலைமை ஒன்று… இலக்கு ஒன்று… கழக வெற்றியே நம் இலக்கு!” - திருச்சி மாநகர் மாவட்ட கழக செயலாளர் C. கார்த்திகேயன் B.E. எழுச்சியுரை!",
+          summary: "திருச்சி மாநகர் மாவட்ட கழக செயலாளர், முன்னாள் ஆவின் சேர்மன் எங்கள் அண்ணன் C. கார்த்திகேயன் அவர்களின் தலைமையில், கழகத் தொண்டர்களின் எழுச்சியோடும், மக்கள் ஆதரவோடும் நிகழ்வு சிறப்பாக நடைபெற்று வெற்றிகரமாக நிறைவடைந்தது!",
+          details: "திருச்சி மாநகர் மாவட்ட கழக செயலாளர், முன்னாள் ஆவின் சேர்மன் எங்கள் அண்ணன் C. கார்த்திகேயன் B.E. அவர்களின் தலைமையில், கழகத் தொண்டர்களின் எழுச்சியோடும், மக்கள் பேராதரவோடும் நடைபெற்ற எழுச்சிமிகு நிகழ்வு மிகச் சிறப்பாக நடைபெற்று வெற்றிகரமாக நிறைவடைந்தது!\n\nநிகழ்வில் கழக தொண்டர்கள் மற்றும் நிர்வாகிகளிடையே கம்பீர எழுச்சியுரையாற்றிய மாவட்ட கழக செயலாளர் C. கார்த்திகேயன் B.E. அவர்கள்:\n\n“தலைமை ஒன்று… இலக்கு ஒன்று… கழக வெற்றியே நம் இலக்கு!\n\nகழகத் தொண்டர்களின் தன்னலமற்ற உழைப்பும், மக்களின் பேராதரவுமே நமது மாபெரும் பலம். புரட்சித்தலைவர் எம்.ஜி.ஆர், புரட்சித்தலைவி அம்மா ஆகியோரின் வழியில், கழகப் பொதுச்செயலாளர் அவர்களின் ஆணைக்கிணங்க மக்கள் நலப் பணிகளை தடையின்றி முன்னெடுத்துச் சென்று கழகத்தை வெற்றிப்பாதைக்கு அழைத்துச் செல்வோம்!” என்று முழங்கினார்.",
+          image: "/assets/karthikeyan_speech.png",
+          tag: "எழுச்சியுரை"
+        },
+        {
+          id: 2,
+          date: "15 செப் 2025",
+          title: "பேரறிஞர் அண்ணாவின் 117-வது பிறந்தநாள்! திருவுருவச் சிலைக்கு மாலை அணிவித்து மரியாதை செலுத்திய C. கார்த்திகேயன் B.E.",
+          summary: "பேரறிஞர் அண்ணாவின் 117-வது பிறந்தநாளை முன்னிட்டு, திருச்சி மாநகர் மாவட்டம் சார்பில் பிரம்மாண்ட பேரணி மற்றும் அண்ணா சிலைக்கு மாலை அணிவித்து, பொதுமக்களுக்கு நலத்திட்ட உதவிகள் வழங்கப்பட்டன.",
+          details: "பேரறிஞர் அண்ணாவின் 117-வது பிறந்தநாளை முன்னிட்டு, திருச்சி மாநகர் மாவட்ட கழக செயலாளர் C. கார்த்திகேயன் B.E. அவர்கள் தலைமையில் கழக நிர்வாகிகள், தொண்டர்கள் மற்றும் பொதுமக்கள் ஆயிரக்கணக்கில் திரண்டு எழுச்சிமிகு பேரணி நடத்தினர். திருச்சி சிந்தாமணி பகுதியில் உள்ள பேரறிஞர் அண்ணாவின் முழு திருவுருவச் சிலைக்கு மாலை அணிவித்து மலரஞ்சலி செலுத்தி வீரவணக்கம் செய்யப்பட்டது. அதனைத் தொடர்ந்து கழகக் கொடியேற்றி வைத்து, பொதுமக்களுக்கு அன்னதானம், இனிப்புகள் மற்றும் நலத்திட்ட உதவிகள் வழங்கப்பட்டன.",
+          image: "/assets/anna_statue_homage.png",
+          tag: "அண்ணா பிறந்தநாள்"
+        },
+        {
+          id: 2,
           date: "12 செப் 2025",
           title: "மழை வெள்ளத்தால் பாதிக்கப்பட்ட மக்களுக்கு அத்தியாவசிய பொருட்கள் வழங்கல்",
           summary: "திருச்சி மாநகர் பகுதிகளில் மழை வெள்ளத்தால் பாதிக்கப்பட்ட குடும்பங்களுக்கு நிவாரண உதவிகள் மற்றும் உணவுப் பொருட்கள் நேரடியாக வழங்கப்பட்டன.",
@@ -39,7 +56,7 @@ export const translations = {
           tag: "நிவாரணம்"
         },
         {
-          id: 2,
+          id: 3,
           date: "10 செப் 2025",
           title: "திருச்சி மாநகரில் புதிய சாலை பணிகளுக்கான அடிக்கல் நாட்டப்பட்டது",
           summary: "ரூபாய் 4.8 கோடி மதிப்பீட்டில் முக்கிய இணைப்பு சாலைகளை நவீன தார்ச் சாலையாக அமைப்பதற்கான பூமி பூஜை நடைபெற்றது.",
@@ -48,7 +65,7 @@ export const translations = {
           tag: "உள்கட்டமைப்பு"
         },
         {
-          id: 3,
+          id: 4,
           date: "08 செப் 2025",
           title: "பள்ளி மாணவ, மாணவிகளுக்கு கல்வி உதவித்தொகை மற்றும் மடிக்கணினி வழங்கல்",
           summary: "அரசுப் பள்ளி மாணவ, மாணவிகளின் உயர் கல்வி கனவை நனவாக்கும் வகையில் கல்வி ஊக்கத்தொகை வழங்கப்பட்டது.",
@@ -174,27 +191,62 @@ export const translations = {
       items: [
         {
           id: 1,
+          title: "கழக மூத்த முன்னோடிக்கு பொன்னாடை போர்த்தி நினைவுப் பரிசு வழங்கி கௌரவிப்பு - C. கார்த்திகேயன் B.E.",
+          tag: "கௌரவிப்பு",
+          date: "17 செப் 2025",
+          image: "/assets/veteran_felicitation.jpg"
+        },
+        {
+          id: 2,
+          title: "“களமிறங்குவோம் வெற்றி பெறுவோம்” - திருச்சி மாநகர் மாவட்ட கழக பிரம்மாண்ட கள ஆய்வு ஆலோசனைக் கூட்டம்",
+          tag: "கழக மாநாடு",
+          date: "17 செப் 2025",
+          image: "/assets/party_stage_conference.jpg"
+        },
+        {
+          id: 3,
+          title: "“தலைமை ஒன்று… இலக்கு ஒன்று… கழக வெற்றியே நம் இலக்கு!” - C. கார்த்திகேயன் B.E. எழுச்சியுரை",
+          tag: "எழுச்சியுரை",
+          date: "16 செப் 2025",
+          image: "/assets/karthikeyan_speech.png"
+        },
+        {
+          id: 4,
+          title: "பேரறிஞர் அண்ணாவின் 117-வது பிறந்தநாள் விழா பேரணி மற்றும் மலரஞ்சலி",
+          tag: "அண்ணா விழா",
+          date: "15 செப் 2025",
+          image: "/assets/anna_rally.png"
+        },
+        {
+          id: 3,
+          title: "சிந்தாமணி அண்ணா திருவுருவச் சிலைக்கு மாலை அணிவித்து வீரவணக்கம்",
+          tag: "வீரவணக்கம்",
+          date: "15 செப் 2025",
+          image: "/assets/anna_statue_homage.png"
+        },
+        {
+          id: 3,
           title: "பொதுமக்களுக்கு நலத்திட்ட உதவிகள் மற்றும் நிவாரணம் வழங்கல்",
           tag: "மக்கள் நலன்",
           date: "12 செப் 2025",
           image: "/assets/aid_distribution.jpg"
         },
         {
-          id: 2,
+          id: 4,
           title: "பசுமை தமிழகம் - 5,000 மரக்கன்றுகள் நடும் பெருவிழா",
           tag: "சுற்றுச்சூழல்",
           date: "11 செப் 2025",
           image: "/assets/tree_planting.jpg"
         },
         {
-          id: 3,
+          id: 5,
           title: "மாநகர வளர்ச்சிப் பணிகள் மற்றும் திட்டங்கள் குறித்த ஆய்வு",
           tag: "ஆய்வுக்கூட்டம்",
           date: "09 செப் 2025",
           image: "/assets/school.jpg"
         },
         {
-          id: 4,
+          id: 6,
           title: "நவீன புதிய தார்ச்சாலை அமைக்கும் பணிகள் ஆய்வு",
           tag: "உள்கட்டமைப்பு",
           date: "05 செப் 2025",
@@ -229,6 +281,79 @@ export const translations = {
       successMsg: "உங்கள் கோரிக்கை வெற்றிகரமாக பதிவு செய்யப்பட்டது!",
       trackingIdText: "உங்கள் கண்காணிப்பு எண் (Tracking ID):"
     },
+    about: {
+      sectionBadge: "அரசியல் தலைவர் – வாழ்க்கை வரலாறு",
+      mainTitle: "C. கார்த்திகேயன் B.E.,",
+      subTitle: "திருச்சி மண்ணின் மைந்தர் | மக்கள் பணியில் அர்ப்பணிப்புடன் தொடரும் பயணம்",
+      tagline: "“தலைமை ஒன்று… இலக்கு ஒன்று… கழக வெற்றியே நம் இலக்கு!”",
+      geoBadge: "📍 திருச்சி (சின்னக்கடை வீதி & மலைக்கோட்டை)",
+      profile: {
+        name: "C. கார்த்திகேயன் B.E.",
+        dob: "25 மே 1979",
+        birthPlace: "திருச்சிராப்பள்ளி (சின்னக்கடை வீதி & மலைக்கோட்டை)",
+        father: "திரு. P. சின்னதுரை (முன்னாள் தாசில்தார் / Tahsildar)",
+        mother: "திருமதி P. சரோஜா",
+        wife: "திருமதி கார்த்திகேயன்",
+        daughter: "செல்வி லட்சனா",
+        brother: "திரு. அரவிந்தன் (B.Com)",
+        sister: "திருமதி ஈஸ்வரியா (பட்டதாரி)",
+        familyType: "பாரம்பரிய கூட்டுக் குடும்பம்",
+        schoolPrimary: "சின்னக்கடை வீதி பள்ளி, திருச்சி (3 முதல் 5ஆம் வகுப்பு)",
+        schoolHigher: "Bishop Heber Higher Secondary School, திருச்சி (6 முதல் 12ஆம் வகுப்பு)",
+        college: "Mookambigai College of Engineering (B.E. Mechanical Engineering - First Class)",
+        party: "அனைத்திந்திய அண்ணா திராவிட முன்னேற்றக் கழகம் (AIADMK)",
+        currentRole: "திருச்சி மாநகர மாவட்டக் கழகச் செயலாளர்",
+        wardRole: "திருச்சி 13-வது வார்டு வட்டக் கழகச் செயலாளர்",
+        prevRoles: [
+          "முன்னாள் பெருந்தலைவர் - ஆவின் (2 முறை, 8 மாவட்டங்கள்)",
+          "முன்னாள் திருச்சி மாநகராட்சி மன்ற உறுப்பினர்",
+          "உறுப்பினர் - Town Planning Group (13-வது வார்டு)",
+          "மாணவர் அணி மாவட்டப் பொறுப்பாளர்"
+        ]
+      },
+      tabs: {
+        bio: "சுயவிவரம் & குடும்பம்",
+        education: "கல்விப் பயணம்",
+        political: "அரசியல் & பொறுப்புகள்",
+        service: "மக்கள் நலப் பணிகள்"
+      },
+      stories: {
+        rootsTitle: "திருச்சி மண்ணில் பிறந்து வளர்ந்தவர்",
+        rootsText: "திருச்சிராப்பள்ளியின் வரலாற்றுப் புகழ்மிக்க சின்னக்கடை வீதி மற்றும் மலைக்கோட்டை பகுதிகளில் பிறந்து வளர்ந்தவர் C. கார்த்திகேயன். சிறு வயது முதலே அப்பகுதி மக்களுடன் நெருக்கமாகப் பழகி, அவர்களின் அன்றாட வாழ்க்கை மற்றும் தேவைகளை அருகிலிருந்து அறிந்து வளர்ந்தார்.\n\nகூட்டுக் குடும்பத்தில் வளர்ந்த இவர், குடும்ப உறவுகளுடன் இணைந்து வாழும் பண்பையும், சமூகத்தோடு தோளோடு தோள் நின்று பணியாற்றும் நற்பண்புகளையும் இளமையிலேயே பெற்றார்.",
+        eduTitle: "கல்விப் பயணம் – முதல் வகுப்பில் B.E. பட்டதாரி",
+        eduText: "தனது பள்ளிப் பருவத்தின் தொடக்கக் கல்வியை திருச்சிராப்பள்ளி சின்னக்கடை வீதி பகுதியில் 3 முதல் 5ஆம் வகுப்பு வரை பயின்றார். தொடர்ந்து திருச்சியின் முன்னணி கல்வி நிறுவனமான Bishop Heber Higher Secondary School-இல் 6 முதல் 12ஆம் வகுப்பு வரை கல்வி பயின்றார்.\n\nஅதன்பின் Mookambigai College of Engineering நிறுவனத்தில் B.E. Mechanical Engineering பட்டப்படிப்பை பயின்று, முதல் வகுப்பில் (First Class) தேர்ச்சி பெற்று பட்டதாரி பொறியாளரானார்.",
+        fatherTitle: "தந்தையின் மக்கள் சேவை – தொடரும் மக்கள் அறப்பணி",
+        fatherText: "C. கார்த்திகேயன் அவர்களின் தந்தை P. சின்னதுரை அவர்கள் அரசு தாசில்தாராகப் (Tahsildar) பணியாற்றி, தனது பணிக்காலத்தில் பொதுமக்களுக்கு தன்னலமற்ற சேவையாற்றியவர்.\n\nதந்தையின் சமூக அக்கறை மற்றும் மக்களுக்கு உதவும் உயர்ந்த பண்புகளை சிறுவயதிலிருந்தே கண்டு வளர்ந்த கார்த்திகேயன் அவர்கள், அதனை தனது அரசியல் மற்றும் பொதுவாழ்க்கையின் தாரக மந்திரமாக ஏற்று செயல்படுத்தி வருகிறார்.",
+        politicalTitle: "அரசியலுக்குள் வந்த பயணமும் கழகப் பணிகளும்",
+        politicalText: "புரட்சித் தலைவி அம்மா ஜெ. ஜெயலலிதா அவர்களின் கம்பீர அரசியல் செயல்பாடுகள் மற்றும் ஏழை எளிய மக்களுக்கான வரலாற்று நலத்திட்டங்களில் கொண்ட ஆழ்ந்த ஈர்ப்பின் காரணமாக, இளம் வயதிலேயே அனைத்திந்திய அண்ணா திராவிட முன்னேற்றக் கழகத்தில் (AIADMK) இணைந்தார்.\n\nகழக மாணவர் அணி மாவட்டப் பொறுப்பு உள்ளிட்ட அடித்தளப் பணிகளில் தீவிரமாக ஈடுபட்டு தொண்டர்களின் நம்பிக்கையைப் பெற்றார். தொடர்ந்து திருச்சி 13-வது வார்டு வட்டக் கழகச் செயலாளராகப் பணியாற்றி, தற்போது திருச்சி மாநகர மாவட்டக் கழகச் செயலாளராகக் கட்சியை வெற்றிகரமாக வழிநடத்தி வருகிறார்.",
+        governanceTitle: "மாநகராட்சி மன்ற உறுப்பினர் & ஆவின் பெருந்தலைவர் பணி",
+        governanceText: "திருச்சி மாநகராட்சி மன்ற உறுப்பினர் என்ற பொறுப்பில் சிறப்பாக மக்கள் பணியாற்றியுள்ளார். மேலும் திருச்சி 13-வது வார்டு தொடர்பான Town Planning Group குழுவின் உறுப்பினராக நகர்ப்புற கட்டமைப்பு திட்டங்களை முன்னெடுத்தார்.\n\nகுறிப்பாக, தமிழக அரசின் புகழ்பெற்ற ஆவின் (AVIN) பால் உற்பத்தியாளர்கள் கூட்டுறவு அமைப்பின் பெருந்தலைவர் (Chairman) பொறுப்பில் இரண்டு முறை தேர்ந்தெடுக்கப்பட்டு, திருச்சி, கரூர், புதுக்கோட்டை, பெரம்பலூர், அரியலூர் உள்ளிட்ட 8 மாவட்டங்களுக்கான நிர்வாகப் பொறுப்புகளை மிகச் சிறப்பாக வழிநடத்தினார்.",
+        welfareTitle: "விவசாயிகள், மாணவர்கள் மற்றும் பொதுமக்களுக்கான நலப்பணிகள்",
+        welfareText: "• விவசாயிகள் & பால் உற்பத்தியாளர்கள்: பால் உற்பத்தியாளர்களின் வாழ்வாதாரத்தை காக்க பால் கொள்முதல் விலையை உயர்த்த வேண்டும் என்ற கோரிக்கையை தீவிரமாக முன்னெடுத்தார். பால் முகவர்களின் வருமானம் உயரவும் செயலாற்றினார்.\n\n• மாணவர்களுக்கான கல்வி உதவி: வறுமை காரணமாக உயர்கல்வி தொடர இயலாத ஏழை மாணவர்களுக்கு தனது சொந்த பங்களிப்பில் கல்விக் கட்டணம் செலுத்தி உதவி வருகிறார்.\n\n• மக்கள் மனுக்களுக்கு உடனடி தீர்வு: பொதுமக்கள் நேரில் அளிக்கும் மனுக்களை உடனுக்குடன் பெற்று, சம்பந்தப்பட்ட துறை அதிகாரிகளுடன் நேரில் பேசி தீர்வு காணும் மக்கள் சேவகராக விளங்கி வருகிறார்."
+      },
+      faqs: [
+        {
+          q: "C. கார்த்திகேயன் B.E. அவர்களின் பூர்வீகம் மற்றும் பிறந்த தேதி எது?",
+          a: "இவர் 25 மே 1979 அன்று திருச்சிராப்பள்ளியில் பிறந்தவர். திருச்சியின் வரலாற்றுச் சிறப்புமிக்க சின்னக்கடை வீதி மற்றும் மலைக்கோட்டை பகுதிகளில் கூட்டுக் குடும்பத்தில் பிறந்து வளர்ந்தவர்."
+        },
+        {
+          q: "இவரது கல்வித் தகுதிகள் மற்றும் பயின்ற கல்லூரிகள் யாவை?",
+          a: "திருச்சி பிஷப் ஹீபர் மேல்நிலைப் பள்ளியில் (Bishop Heber HSS) பள்ளிப் படிப்பையும், மூகாம்பிகை பொறியியல் கல்லூரியில் (Mookambigai College of Engineering) B.E. Mechanical Engineering பட்டத்தை முதல் வகுப்பில் தேர்ச்சி பெற்று பட்டம் பெற்றார்."
+        },
+        {
+          q: "கழகத்தில் மற்றும் உள்ளாட்சியில் இவர் வகித்த முக்கியப் பொறுப்புகள் என்ன?",
+          a: "அதிமுக திருச்சி மாநகர மாவட்டக் கழகச் செயலாளர், முன்னாள் 2 முறை ஆவின் பெருந்தலைவர் (8 மாவட்டங்கள்), முன்னாள் திருச்சி மாநகராட்சி மன்ற உறுப்பினர், மற்றும் வட்டக் கழகச் செயலாளர் பொறுப்புகளை வகித்துள்ளார்."
+        },
+        {
+          q: "விவசாயிகள் மற்றும் மாணவர்களுக்கு இவர் ஆற்றிய முக்கிய நலப்பணிகள் என்ன?",
+          a: "ஆவின் தலைவராக இருந்தபோது பால் கொள்முதல் விலை மற்றும் முகவர் வருவாய் உயர்வுக்கு பாடுபட்டார். வசதியற்ற மாணவர்களுக்கு சொந்த செலவில் கல்லூரி கல்விக் கட்டணம் செலுத்தி கல்வி நல்கை வழங்கி வருகிறார்."
+        },
+        {
+          q: "அவரது குடும்பப் பின்னணி மற்றும் தந்தையின் சமூகப் பங்களிப்பு என்ன?",
+          a: "இவரது தந்தை P. சின்னதுரை அரசு தாசில்தாராக (Tahsildar) பணியாற்றி பொதுமக்களுக்கு அர்ப்பணிப்புடன் சேவை புரிந்தவர். தாய் P. சரோஜா. இவர் கூட்டுக் குடும்ப பாரம்பரியத்தில் வளர்ந்து மக்களுக்காக இயங்கி வருகிறார்."
+        }
+      ]
+    },
     leadership: {
       quote: "“மக்கள் நலனே எங்கள் இலக்கு”",
       leaderName: "புரட்சித்தலைவி அம்மா & கழக முன்னோடிகள்",
@@ -248,6 +373,7 @@ export const translations = {
     siteMotto: "People's Welfare is Our Foremost Priority",
     nav: {
       home: "Home",
+      about: "Biography",
       mla: "District Secretary",
       news: "News",
       events: "Events",
@@ -276,6 +402,24 @@ export const translations = {
       items: [
         {
           id: 1,
+          date: "16 Sep 2025",
+          title: "“One Leadership… One Goal… Party Victory is Our Goal!” - Inspiring address by C. Karthikeyan B.E.",
+          summary: "Under the leadership of Trichy City District Party Secretary & Former Aavin Chairman, our elder brother C. Karthikeyan, with the surging energy of party cadres and overwhelming public support, the grand event concluded with tremendous success!",
+          details: "Under the leadership of Trichy City District Party Secretary and Former Aavin Chairman, our elder brother C. Karthikeyan B.E., a massive gathering of party cadres and citizens was conducted with unprecedented enthusiasm and concluded with tremendous success!\n\nDelivering a powerful speech to thousands of party workers and functionaries, he declared:\n\n“One Leadership… One Goal… Party Victory is Our Goal!\n\nThe selfless dedication of our cadres and the deep trust of our people are our supreme strengths. Following the illustrious footsteps of Puratchi Thalaivar MGR and Puratchi Thalaivi Amma, and in accordance with the guidance of the Party General Secretary, let us take welfare services to every doorstep and lead the party to historic victory!”",
+          image: "/assets/karthikeyan_speech.png",
+          tag: "Party Rally"
+        },
+        {
+          id: 2,
+          date: "15 Sep 2025",
+          title: "Perarignar Anna's 117th Birth Anniversary! Grand floral tribute & rally led by C. Karthikeyan B.E. in Trichy",
+          summary: "On the occasion of Perarignar Anna's 117th birth anniversary, a grand procession and floral homage were held in Trichy city district, followed by welfare assistance distribution.",
+          details: "On the occasion of Perarignar Anna's 117th birth anniversary, Trichy City District Secretary C. Karthikeyan B.E. led thousands of party functionaries, cadres, and citizens in an inspiring rally. Floral garlands and homage were paid at the Perarignar Anna statue in Chinthamani, Trichy, followed by hoisting the party flag, distributing sweets, and providing essential welfare kits to the public.",
+          image: "/assets/anna_statue_homage.png",
+          tag: "Anniversary"
+        },
+        {
+          id: 2,
           date: "12 Sep 2025",
           title: "Essential relief kits distributed to rain and flood affected families",
           summary: "Essential grocery items, clothing, and medicines distributed directly to affected families across Trichy city.",
@@ -284,7 +428,7 @@ export const translations = {
           tag: "Relief"
         },
         {
-          id: 2,
+          id: 3,
           date: "10 Sep 2025",
           title: "Foundation stone laid for new modern asphalt road network across Trichy",
           summary: "Bhoomi Pooja performed for modern asphalt road connectivity project worth Rs. 4.8 Crores.",
@@ -293,7 +437,7 @@ export const translations = {
           tag: "Infrastructure"
         },
         {
-          id: 3,
+          id: 4,
           date: "08 Sep 2025",
           title: "Educational scholarships and laptops presented to school students",
           summary: "Special educational incentive awards and laptops distributed to support government school students.",
@@ -419,27 +563,62 @@ export const translations = {
       items: [
         {
           id: 1,
+          title: "Honoring Senior Party Veteran with Golden Shawl & Memento - C. Karthikeyan B.E.",
+          tag: "Honor",
+          date: "17 Sep 2025",
+          image: "/assets/veteran_felicitation.jpg"
+        },
+        {
+          id: 2,
+          title: "“To the Field… Towards Victory!” - AIADMK Trichy City District Cadre Conference",
+          tag: "Party Conference",
+          date: "17 Sep 2025",
+          image: "/assets/party_stage_conference.jpg"
+        },
+        {
+          id: 3,
+          title: "“One Leadership… One Goal… Party Victory is Our Goal!” - Speech by C. Karthikeyan B.E.",
+          tag: "Rally Speech",
+          date: "16 Sep 2025",
+          image: "/assets/karthikeyan_speech.png"
+        },
+        {
+          id: 4,
+          title: "Perarignar Anna 117th birth anniversary grand procession",
+          tag: "Celebration",
+          date: "15 Sep 2025",
+          image: "/assets/anna_rally.png"
+        },
+        {
+          id: 3,
+          title: "Floral tribute at Perarignar Anna statue in Trichy",
+          tag: "Homage",
+          date: "15 Sep 2025",
+          image: "/assets/anna_statue_homage.png"
+        },
+        {
+          id: 3,
           title: "Direct welfare assistance & flood relief distribution",
           tag: "Public Engagement",
           date: "12 Sep 2025",
           image: "/assets/aid_distribution.jpg"
         },
         {
-          id: 2,
+          id: 4,
           title: "Green Tamil Nadu - 5,000 sapling mass plantation drive",
           tag: "Environment",
           date: "11 Sep 2025",
           image: "/assets/tree_planting.jpg"
         },
         {
-          id: 3,
+          id: 5,
           title: "City development projects review with district coordinators",
           tag: "Governance",
           date: "09 Sep 2025",
           image: "/assets/school.jpg"
         },
         {
-          id: 4,
+          id: 6,
           title: "Asphalt bypass highway construction inspection",
           tag: "Infrastructure",
           date: "05 Sep 2025",
@@ -473,6 +652,79 @@ export const translations = {
       ],
       successMsg: "Your grievance has been successfully registered!",
       trackingIdText: "Your Reference Tracking ID:"
+    },
+    about: {
+      sectionBadge: "Political Leader – Biography & Profile",
+      mainTitle: "C. Karthikeyan B.E.,",
+      subTitle: "Son of Trichy Soil | Dedicated to People's Welfare & Public Service",
+      tagline: "“One Leadership… One Goal… Party Victory is Our Goal!”",
+      geoBadge: "📍 Tiruchirappalli (Chinnakkadai St & Rockfort)",
+      profile: {
+        name: "C. Karthikeyan B.E.",
+        dob: "25 May 1979",
+        birthPlace: "Tiruchirappalli (Chinnakkadai Street & Rockfort)",
+        father: "Mr. P. Chinathurai (Former Government Tahsildar)",
+        mother: "Mrs. P. Saroja",
+        wife: "Mrs. Karthikeyan",
+        daughter: "Ms. Lakshana",
+        brother: "Mr. Aravinthan (B.Com)",
+        sister: "Mrs. Eswariya (Graduate)",
+        familyType: "Traditional Joint Family",
+        schoolPrimary: "Chinnakkadai Street School, Trichy (Grade 3 to 5)",
+        schoolHigher: "Bishop Heber Higher Secondary School, Trichy (Grade 6 to 12)",
+        college: "Mookambigai College of Engineering (B.E. Mechanical Engineering - First Class)",
+        party: "All India Anna Dravida Munnetra Kazhagam (AIADMK)",
+        currentRole: "AIADMK Trichy City District Secretary",
+        wardRole: "Trichy 13th Ward Secretary",
+        prevRoles: [
+          "Former Chairman, AAVIN (2 Terms, Administering 8 Districts)",
+          "Former Councilor, Trichy City Corporation",
+          "Member, Town Planning Group (Ward 13)",
+          "District In-charge, AIADMK Student Wing"
+        ]
+      },
+      tabs: {
+        bio: "Profile & Family Roots",
+        education: "Education & Engineering",
+        political: "Political Journey & Roles",
+        service: "Public Welfare & Impact"
+      },
+      stories: {
+        rootsTitle: "Born & Raised in the Soil of Tiruchirappalli",
+        rootsText: "Born and raised in the historic heart of Tiruchirappalli—Chinnakkadai Street and the iconic Rockfort vicinity—C. Karthikeyan spent his formative years in close contact with ordinary citizens, understanding their challenges, aspirations, and daily needs.\n\nRaised in a joint family ethos, he imbibed the core virtues of familial harmony, community service, and empathy at an early age.",
+        eduTitle: "Educational Milestones – Graduate Mechanical Engineer",
+        eduText: "He completed his primary schooling in the Chinnakkadai Street neighborhood (Grades 3 to 5) and pursued his secondary and higher secondary education at the prestigious Bishop Heber Higher Secondary School, Trichy (Grades 6 to 12).\n\nHe then earned his Bachelor of Engineering (B.E.) in Mechanical Engineering with First Class honors from Mookambigai College of Engineering, combining technical analytical rigor with public leadership.",
+        fatherTitle: "Father's Public Service Legacy – A Continuing Mission",
+        fatherText: "His father, Late Mr. P. Chinathurai, served the public with unwavering honesty and devotion as a government Tahsildar, leaving a revered reputation for resolving people's issues without hesitation.\n\nInspired by his father's compassionate legacy from childhood, C. Karthikeyan adopted public service as his guiding life principle, carrying forward the flame of selfless service.",
+        politicalTitle: "Political Journey & Party Responsibilities",
+        politicalText: "Drawn to the charismatic leadership and pro-poor welfare revolution of Puratchi Thalaivi Amma J. Jayalalithaa, he entered public life at a young age through the All India Anna Dravida Munnetra Kazhagam (AIADMK).\n\nBeginning in the grassroots student wing, he earned the confidence of party cadres through unremitting field work. He went on to serve as the District In-charge of the Student Wing, Secretary for Trichy 13th Ward, and today serves with distinction as the District Secretary of AIADMK Trichy City District.",
+        governanceTitle: "Civic Governance & Two-Term Aavin Chairman",
+        governanceText: "Serving as a Trichy City Corporation Councilor and active member of the Ward 13 Town Planning Group, he championed local civic infrastructure, water access, and urban development projects.\n\nRecognizing his administrative efficiency, he was elected twice as the Chairman of Tamil Nadu's apex dairy cooperative, AAVIN, supervising comprehensive dairy operations and milk federation networks across 8 key districts (Trichy, Karur, Pudukkottai, Perambalur, Ariyalur, etc.).",
+        welfareTitle: "Farmers, Students & Citizen Welfare Initiatives",
+        welfareText: "• Farmers & Milk Producers: He consistently championed higher milk procurement prices to safeguard the livelihood of dairy farmers, while expanding financial margins for grassroots milk distribution agents.\n\n• Educational Scholarships: Dedicated to fostering education among economically disadvantaged youth, he personally sponsors college and school fees for underprivileged students.\n\n• Citizen Grievance Resolution: Through regular camp meetings and field interactions, he personally receives citizens' petitions, coordinating swiftly with government departments for fast-track resolution."
+      },
+      faqs: [
+        {
+          q: "What is C. Karthikeyan's background and birthplace?",
+          a: "Born on 25 May 1979 in Tiruchirappalli, he grew up in the historic Chinnakkadai Street and Rockfort areas in a traditional joint family deeply connected with the local community."
+        },
+        {
+          q: "What is his educational qualification?",
+          a: "He studied at Bishop Heber Higher Secondary School, Trichy, and graduated with First Class honors in B.E. Mechanical Engineering from Mookambigai College of Engineering."
+        },
+        {
+          q: "What key public and political positions has he held?",
+          a: "He currently serves as the AIADMK Trichy City District Secretary. Previously, he served twice as Aavin Chairman across 8 districts, Trichy City Corporation Councilor, and AIADMK Ward Secretary."
+        },
+        {
+          q: "What are his key public welfare contributions?",
+          a: "Raising milk procurement prices for dairy farmers, supporting milk distribution agents, personal educational fee sponsorships for poor students, and continuous grassroots grievance resolution."
+        },
+        {
+          q: "What is his family background and heritage?",
+          a: "His father, Mr. P. Chinathurai, served with distinction as a government Tahsildar. His mother is Mrs. P. Saroja. He lives with his wife, daughter Lakshana, and extended family in Trichy."
+        }
+      ]
     },
     leadership: {
       quote: "“People's welfare is our goal”",

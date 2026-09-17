@@ -1,12 +1,18 @@
 import React from 'react';
+import { ArrowRight } from 'lucide-react';
 
-export default function Hero({ t }) {
+export default function Hero({ t, onExploreAbout }) {
   return (
     <section className="hero-banner" id="home">
       <div className="hero-layout">
         {/* Left Column: Leader Profile with Cutout Portrait */}
         <div className="hero-leader-info" id="leader">
-          <div className="leader-portrait-wrap">
+          <div 
+            className="leader-portrait-wrap"
+            onClick={onExploreAbout}
+            style={{ cursor: onExploreAbout ? 'pointer' : 'default' }}
+            title="தலைவர் வாழ்க்கை வரலாற்றைக் காண கிளிக் செய்க"
+          >
             <img
               src="/assets/hero_leader_portrait.jpg"
               alt={t.hero.name}
@@ -29,6 +35,17 @@ export default function Hero({ t }) {
                 </React.Fragment>
               ))}
             </div>
+
+            {onExploreAbout && (
+              <button 
+                onClick={onExploreAbout}
+                className="hero-bio-link-btn"
+                title="முழு வாழ்க்கை வரலாறு மற்றும் விபரங்கள்"
+              >
+                <span>{t.nav.about || 'வாழ்க்கை வரலாறு'}</span>
+                <ArrowRight size={14} />
+              </button>
+            )}
           </div>
         </div>
 

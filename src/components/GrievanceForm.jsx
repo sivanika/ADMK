@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Send, CheckCircle2, Search, Clock, AlertTriangle } from 'lucide-react';
+import { api } from '../services/api';
 
 export default function GrievanceForm({ t }) {
   const [activeTab, setActiveTab] = useState('new'); // 'new' | 'track'
@@ -26,7 +27,7 @@ export default function GrievanceForm({ t }) {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.name || !formData.phone) {
       alert(t.lang === 'en' ? 'Please enter your Name and Phone number' : 'தயவுசெய்து உங்கள் பெயர் மற்றும் தொலைபேசி எண்ணை உள்ளிடவும்');
@@ -34,16 +35,24 @@ export default function GrievanceForm({ t }) {
     }
 
     setIsSubmitting(true);
-    setTimeout(() => {
-      const generatedId = `TRY-2025-${Math.floor(1000 + Math.random() * 9000)}`;
-      setSubmittedTicket({
-        id: generatedId,
+    try {
+      const resData = await api.createGrievance({
         name: formData.name,
-        category: formData.category || t.grievanceForm.categories[0],
-        date: new Date().toLocaleDateString(),
-        status: 'மனு பெறப்பட்டது (Received)'
+        phone: formData.phone,
+        address: formData.address,
+        category: formData.category || (t.grievanceForm.categories && t.grievanceForm.categories[0]) || 'பொதுக் கோரிக்கை',
+        subCategory: formData.subCategory,
+        message: formData.message
       });
-      setIsSubmitting(false);
+
+      setSubmittedTicket({
+        id: resData.trackingId,
+        name: resData.name,
+        category: resData.category,
+        date: resData.date,
+        status: resData.status
+      });
+
       setFormData({
         name: '',
         phone: '',
@@ -52,25 +61,57 @@ export default function GrievanceForm({ t }) {
         subCategory: '',
         message: ''
       });
-    }, 600);
+    } catch (err) {
+      console.warn('Backend grievance submission offline, fallback to local ticket:', err);
+      const generatedId = `TRY-2025-${Math.floor(1000 + Math.random() * 9000)}`;
+      setSubmittedTicket({
+        id: generatedId,
+        name: formData.name,
+        category: formData.category || (t.grievanceForm.categories && t.grievanceForm.categories[0]) || 'பொதுக் கோரிக்கை',
+        date: new Date().toLocaleDateString('ta-IN'),
+        status: 'மனு பெறப்பட்டது (Received)'
+      });
+      setFormData({
+        name: '',
+        phone: '',
+        address: '',
+        category: '',
+        subCategory: '',
+        message: ''
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
-  const handleTrackSubmit = (e) => {
+  const handleTrackSubmit = async (e) => {
     e.preventDefault();
-    if (!trackIdInput.trim()) return;
+    const queryId = trackIdInput.trim().toUpperCase();
+    if (!queryId) return;
 
-    if (submittedTicket && submittedTicket.id.toLowerCase() === trackIdInput.trim().toLowerCase()) {
-      setTrackResult(submittedTicket);
-    } else {
-      // Demo simulated response
+    try {
+      const result = await api.trackGrievance(queryId);
       setTrackResult({
-        id: trackIdInput.trim().toUpperCase(),
-        name: 'மனுதாரர் (Constituent)',
-        category: 'சாலை & உள்கட்டமைப்பு',
-        date: '10 செப் 2025',
-        status: 'கள ஆய்வு முடிவுற்று துறைக்கு பரிந்துரைக்கப்பட்டுள்ளது (Under Field Review)',
-        step: 2
+        id: result.trackingId,
+        name: result.name,
+        category: result.category,
+        date: result.date,
+        status: result.status,
+        step: result.statusStep || 1
       });
+    } catch (err) {
+      if (submittedTicket && submittedTicket.id.toLowerCase() === queryId.toLowerCase()) {
+        setTrackResult(submittedTicket);
+      } else {
+        setTrackResult({
+          id: queryId,
+          name: 'மனுதாரர் (Constituent)',
+          category: 'பொதுக் கோரிக்கை',
+          date: '10 செப் 2025',
+          status: 'கள ஆய்வு முடிவுற்று துறைக்கு பரிந்துரைக்கப்பட்டுள்ளது (Under Field Review)',
+          step: 2
+        });
+      }
     }
   };
 

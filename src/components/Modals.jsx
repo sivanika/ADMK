@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Calendar, MapPin, Clock, Check, Download, FileText, Search, ExternalLink } from 'lucide-react';
+import { X, Calendar, MapPin, Clock, Check, Download, FileText, Search, ExternalLink, ArrowUpDown, Maximize2 } from 'lucide-react';
 
 /* 1. Citizen Service Detail Modal */
 export function ServiceModal({ service, onClose, lang }) {
@@ -191,7 +191,7 @@ export function NewsModal({ news, onClose, lang }) {
             {news.title}
           </h3>
 
-          <p style={{ fontSize: '0.88rem', color: '#334155', lineHeight: '1.6' }}>
+          <p style={{ fontSize: '0.88rem', color: '#334155', lineHeight: '1.6', whiteSpace: 'pre-line' }}>
             {news.details || news.summary}
           </p>
         </div>

@@ -1,25 +1,36 @@
 import React, { useState } from 'react';
-import { Search, Menu, X } from 'lucide-react';
+import { Search, Menu, X, ShieldCheck } from 'lucide-react';
 
-export default function Navbar({ lang, setLang, t, activeTab, setActiveTab, onOpenSearch }) {
+export default function Navbar({ lang, setLang, t, activeTab, setActiveTab, onOpenSearch, onOpenAdmin, isAdmin }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navItems = [
     { id: 'home', label: t.nav.home },
-    { id: 'leader', label: t.nav.mla },
+    { id: 'about', label: t.nav.about || 'வாழ்க்கை வரலாறு' },
     { id: 'news', label: t.nav.news },
     { id: 'events', label: t.nav.events },
     { id: 'activities', label: t.nav.activities },
-    { id: 'services', label: t.nav.services },
+    // { id: 'services', label: t.nav.services },
     { id: 'contact', label: t.nav.contact }
   ];
 
   const handleNavClick = (id) => {
-    setActiveTab(id);
     setMobileMenuOpen(false);
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    if (id === 'about' || id === 'leader') {
+      setActiveTab('about');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      setActiveTab('home');
+      if (id === 'home') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        setTimeout(() => {
+          const element = document.getElementById(id);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 80);
+      }
     }
   };
 
@@ -59,7 +70,7 @@ export default function Navbar({ lang, setLang, t, activeTab, setActiveTab, onOp
           </ul>
         </nav>
 
-        {/* Right: Actions (Language Switcher, Search, Mobile Hamburger) */}
+        {/* Right: Actions (Language Switcher, Search, Admin Trigger, Mobile Hamburger) */}
         <div className="header-actions">
           {/* Language Toggle Pill */}
           <div className="lang-switcher">
@@ -87,6 +98,31 @@ export default function Navbar({ lang, setLang, t, activeTab, setActiveTab, onOp
             aria-label="Search"
           >
             <Search size={17} />
+          </button>
+
+          {/* Admin CMS Access Trigger */}
+          <button 
+            className="search-icon-btn admin-access-btn" 
+            onClick={onOpenAdmin} 
+            title={isAdmin ? "நிர்வாக பலகை (Admin CMS)" : "நிர்வாகி உள்நுழைவு (Admin Login)"}
+            aria-label="Admin Portal"
+            style={{ position: 'relative' }}
+          >
+            <ShieldCheck size={18} color={isAdmin ? '#15803d' : '#9e1b25'} />
+            {isAdmin && (
+              <span 
+                style={{
+                  position: 'absolute',
+                  top: '4px',
+                  right: '4px',
+                  width: '7px',
+                  height: '7px',
+                  background: '#15803d',
+                  borderRadius: '50%',
+                  border: '1px solid #fff'
+                }} 
+              />
+            )}
           </button>
 
           {/* Mobile Menu Toggle Button */}
@@ -118,6 +154,27 @@ export default function Navbar({ lang, setLang, t, activeTab, setActiveTab, onOp
                 </a>
               </li>
             ))}
+            <li style={{ borderTop: '1px solid #e2e8f0', paddingTop: '10px', marginTop: '6px' }}>
+              <button 
+                onClick={() => { setMobileMenuOpen(false); onOpenAdmin(); }}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  width: '100%',
+                  padding: '10px 14px',
+                  background: '#fef2f2',
+                  color: '#9e1b25',
+                  borderRadius: '8px',
+                  border: '1px solid #fecaca',
+                  fontSize: '0.9rem',
+                  fontWeight: '700'
+                }}
+              >
+                <ShieldCheck size={18} />
+                <span>{isAdmin ? 'நிர்வாக பலகை (Admin CMS)' : 'நிர்வாகி உள்நுழைவு (Admin Login)'}</span>
+              </button>
+            </li>
           </ul>
         </div>
       )}

@@ -1,7 +1,9 @@
 import React from 'react';
 import { ArrowRight, Maximize2 } from 'lucide-react';
 
-export default function GallerySection({ t, onSelectPhoto }) {
+export default function GallerySection({ t, onSelectPhoto, dynamicActivities }) {
+  const items = (dynamicActivities && dynamicActivities.length > 0) ? dynamicActivities : t.activities.items;
+
   return (
     <div className="section-box" id="activities">
       <div className="section-header">
@@ -11,16 +13,16 @@ export default function GallerySection({ t, onSelectPhoto }) {
         </div>
         <button 
           className="view-all-link"
-          onClick={() => onSelectPhoto(t.activities.items[0])}
+          onClick={() => onSelectPhoto(items[0])}
         >
           {t.activities.viewAll} <ArrowRight size={14} />
         </button>
       </div>
 
       <div className="activities-photo-grid">
-        {t.activities.items.map((item) => (
+        {items.map((item) => (
           <div
-            key={item.id}
+            key={item._id || item.id}
             className="gallery-thumbnail-card"
             onClick={() => onSelectPhoto(item)}
             tabIndex={0}

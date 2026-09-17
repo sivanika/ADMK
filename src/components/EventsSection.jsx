@@ -1,7 +1,9 @@
 import React from 'react';
 import { MapPin, Clock, ChevronRight, ArrowRight } from 'lucide-react';
 
-export default function EventsSection({ t, onSelectEvent }) {
+export default function EventsSection({ t, onSelectEvent, dynamicEvents }) {
+  const items = (dynamicEvents && dynamicEvents.length > 0) ? dynamicEvents : t.events.items;
+
   return (
     <div className="section-box" id="events">
       <div className="section-header">
@@ -11,16 +13,16 @@ export default function EventsSection({ t, onSelectEvent }) {
         </div>
         <button 
           className="view-all-link"
-          onClick={() => onSelectEvent(t.events.items[0])}
+          onClick={() => onSelectEvent(items[0])}
         >
           {t.events.viewAll} <ArrowRight size={14} />
         </button>
       </div>
 
       <div className="events-list-vertical">
-        {t.events.items.map((event) => (
+        {items.map((event) => (
           <div
-            key={event.id}
+            key={event._id || event.id}
             className="event-item-card"
             onClick={() => onSelectEvent(event)}
             tabIndex={0}

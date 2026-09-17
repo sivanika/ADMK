@@ -1,7 +1,9 @@
 import React from 'react';
 import { Calendar, ArrowRight } from 'lucide-react';
 
-export default function NewsSection({ t, onSelectNews }) {
+export default function NewsSection({ t, onSelectNews, dynamicNews }) {
+  const items = (dynamicNews && dynamicNews.length > 0) ? dynamicNews : t.news.items;
+
   return (
     <div className="section-box" id="news">
       <div className="section-header">
@@ -11,16 +13,16 @@ export default function NewsSection({ t, onSelectNews }) {
         </div>
         <button 
           className="view-all-link"
-          onClick={() => onSelectNews(t.news.items[0])}
+          onClick={() => onSelectNews(items[0])}
         >
           {t.news.viewAll} <ArrowRight size={14} />
         </button>
       </div>
 
       <div className="news-cards-grid">
-        {t.news.items.map((item) => (
+        {items.map((item) => (
           <article 
-            key={item.id} 
+            key={item._id || item.id} 
             className="news-card-item"
             onClick={() => onSelectNews(item)}
             tabIndex={0}

@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import AboutSection from './components/AboutSection';
 import NewsSection from './components/NewsSection';
 import EventsSection from './components/EventsSection';
 import ServicesHub from './components/ServicesHub';
@@ -8,6 +9,8 @@ import GallerySection from './components/GallerySection';
 import GrievanceForm from './components/GrievanceForm';
 import LeadershipCard from './components/LeadershipCard';
 import Footer from './components/Footer';
+import AdminLoginModal from './components/Admin/AdminLoginModal';
+import AdminDashboard from './components/Admin/AdminDashboard';
 import { 
   ServiceModal, 
   EventModal, 
@@ -16,10 +19,29 @@ import {
   SearchModal 
 } from './components/Modals';
 import { translations } from './data/translations';
+import { api } from './services/api';
 
 export default function App() {
   const [lang, setLang] = useState('ta');
   const [activeTab, setActiveTab] = useState('home');
+
+  // Dynamic Data from MongoDB Backend
+  const [newsData, setNewsData] = useState([]);
+  const [eventsData, setEventsData] = useState([]);
+  const [activitiesData, setActivitiesData] = useState([]);
+
+  // Admin CMS State
+  const [adminToken, setAdminToken] = useState(() => localStorage.getItem('admk_admin_token') || null);
+  const [adminUser, setAdminUser] = useState(() => {
+    try {
+      const saved = localStorage.getItem('admk_admin_user');
+      return saved ? JSON.parse(saved) : null;
+    } catch {
+      return null;
+    }
+  });
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [isDashboardOpen, setIsDashboardOpen] = useState(false);
 
   // Modals state
   const [selectedService, setSelectedService] = useState(null);
@@ -29,6 +51,72 @@ export default function App() {
   const [searchOpen, setSearchOpen] = useState(false);
 
   const t = translations[lang] || translations.ta;
+
+  // Fetch dynamic content from Node/Express MongoDB backend
+  const fetchPortalData = useCallback(async () => {
+    try {
+      const [n, e, a] = await Promise.all([
+        api.getNews(lang).catch(() => []),
+        api.getEvents(lang).catch(() => []),
+        api.getActivities(lang).catch(() => [])
+      ]);
+      if (n && n.length > 0) setNewsData(n);
+      if (e && e.length > 0) setEventsData(e);
+      if (a && a.length > 0) setActivitiesData(a);
+    } catch (err) {
+      console.warn('Backend offline or fetching fallback data:', err);
+    }
+  }, [lang]);
+
+  useEffect(() => {
+    fetchPortalData();
+  }, [fetchPortalData]);
+
+  // Listen to hash changes for deep linking (e.g. /#about)
+  useEffect(() => {
+    const handleHashChange = () => {
+      if (window.location.hash === '#about') {
+        setActiveTab('about');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    };
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
+  const handleOpenAdmin = () => {
+    if (adminToken) {
+      setIsDashboardOpen(true);
+    } else {
+      setIsLoginOpen(true);
+    }
+  };
+
+  const handleLoginSuccess = (token, user) => {
+    setAdminToken(token);
+    setAdminUser(user);
+    setIsLoginOpen(false);
+    setIsDashboardOpen(true);
+  };
+
+  const handleNavigateSection = (sectionId) => {
+    if (sectionId === 'about' || sectionId === 'leader') {
+      setActiveTab('about');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      setActiveTab('home');
+      if (sectionId === 'home') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        setTimeout(() => {
+          const element = document.getElementById(sectionId);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 80);
+      }
+    }
+  };
 
   return (
     <div className="site-wrapper">
@@ -40,42 +128,88 @@ export default function App() {
         activeTab={activeTab}
         setActiveTab={setActiveTab}
         onOpenSearch={() => setSearchOpen(true)}
+        onOpenAdmin={handleOpenAdmin}
+        isAdmin={!!adminToken}
       />
 
-      {/* 2. Hero Section with Leader & Assembly Backdrop */}
-      <Hero t={t} />
+      {/* 2. Main Page Content: Dedicated 'About Him' Tab OR Home Portal */}
+      {activeTab === 'about' ? (
+        /* Dedicated Separate Tab for About Him */
+        <AboutSection 
+          t={t} 
+          onBackHome={() => {
+            setActiveTab('home');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+          onNavigateSection={handleNavigateSection}
+        />
+      ) : (
+        /* Home Tab with Hero, Bento Grid & Citizen Modules */
+        <>
+          {/* Hero Section with Leader & Assembly Backdrop */}
+          <Hero 
+            t={t} 
+            onExploreAbout={() => {
+              setActiveTab('about');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+          />
 
-      {/* 3. Main Bento-Grid Sections */}
-      <main className="main-content">
-        <div className="container">
-          {/* Row 1: News, Events, and Citizen Services Hub */}
-          <div className="row-three-col">
-            <NewsSection t={t} onSelectNews={setSelectedNews} />
-            <EventsSection t={t} onSelectEvent={setSelectedEvent} />
-            <ServicesHub t={t} onSelectService={setSelectedService} />
-          </div>
+          {/* Main Bento-Grid Sections */}
+          <main className="main-content">
+            <div className="container">
+              {/* Row 1: News, Events (Citizen Services Hub commented out) */}
+              <div className="row-three-col">
+                <NewsSection 
+                  t={t} 
+                  onSelectNews={setSelectedNews} 
+                  dynamicNews={newsData} 
+                />
+                <EventsSection 
+                  t={t} 
+                  onSelectEvent={setSelectedEvent} 
+                  dynamicEvents={eventsData} 
+                />
+                {/* Citizen Services Hub Field
+                <ServicesHub 
+                  t={t} 
+                  onSelectService={setSelectedService} 
+                />
+                */}
+              </div>
 
-          {/* Row 2: Constituency Field Works, Grievance Form, and Leadership Tribute */}
-          <div className="row-second">
-            <GallerySection t={t} onSelectPhoto={setSelectedPhoto} />
-            <GrievanceForm t={t} />
-            <LeadershipCard
-              t={t}
-              onOpenPoster={() =>
-                setSelectedPhoto({
-                  image: '/assets/party_leadership_poster.jpg',
-                  title: 'C. கார்த்திகேயன் B.E. - மாவட்ட கழக செயலாளர், திருச்சி மாநகர் மாவட்டம்'
-                })
-              }
-            />
-          </div>
-        </div>
-      </main>
+              {/* Row 2: Constituency Field Works, Grievance Form, and Leadership Tribute */}
+              <div className="row-second">
+                <GallerySection 
+                  t={t} 
+                  onSelectPhoto={setSelectedPhoto} 
+                  dynamicActivities={activitiesData} 
+                />
+                <GrievanceForm t={t} />
+                <LeadershipCard
+                  t={t}
+                  onOpenPoster={() =>
+                    setSelectedPhoto({
+                      image: '/assets/party_leadership_poster.jpg',
+                      title: 'C. கார்த்திகேயன் B.E. - மாவட்ட கழக செயலாளர், திருச்சி மாநகர் மாவட்டம்'
+                    })
+                  }
+                />
+              </div>
+            </div>
+          </main>
+        </>
+      )}
 
-      {/* 4. Footer */}
-      <Footer t={t} onNavClick={setActiveTab} />
+      {/* 3. Footer */}
+      <Footer 
+        t={t} 
+        onNavClick={handleNavigateSection} 
+        onOpenAdmin={handleOpenAdmin}
+        isAdmin={!!adminToken}
+      />
 
-      {/* Interactive Modals */}
+      {/* Interactive Public Modals */}
       <ServiceModal
         service={selectedService}
         onClose={() => setSelectedService(null)}
@@ -101,6 +235,19 @@ export default function App() {
         t={t}
         onSelectNews={setSelectedNews}
         onSelectService={setSelectedService}
+      />
+
+      {/* Admin CMS Authentication & Dashboard Modals */}
+      <AdminLoginModal
+        isOpen={isLoginOpen}
+        onClose={() => setIsLoginOpen(false)}
+        onLoginSuccess={handleLoginSuccess}
+      />
+      <AdminDashboard
+        isOpen={isDashboardOpen}
+        onClose={() => setIsDashboardOpen(false)}
+        token={adminToken}
+        onDataUpdated={fetchPortalData}
       />
     </div>
   );
