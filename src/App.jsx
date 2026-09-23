@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { ChevronUp } from 'lucide-react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import AboutSection from './components/AboutSection';
@@ -7,6 +8,7 @@ import EventsSection from './components/EventsSection';
 import ServicesHub from './components/ServicesHub';
 import GallerySection from './components/GallerySection';
 import GrievanceForm from './components/GrievanceForm';
+import VisionCard from './components/VisionCard';
 import LeadershipCard from './components/LeadershipCard';
 import Footer from './components/Footer';
 import AdminLoginModal from './components/Admin/AdminLoginModal';
@@ -18,12 +20,15 @@ import {
   LightboxModal, 
   SearchModal 
 } from './components/Modals';
+import LoadingScreen from './components/LoadingScreen';
 import { translations } from './data/translations';
 import { api } from './services/api';
 
 export default function App() {
   const [lang, setLang] = useState('ta');
   const [activeTab, setActiveTab] = useState('home');
+  const [showScrollTop, setShowScrollTop] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   // Dynamic Data from MongoDB Backend
   const [newsData, setNewsData] = useState([]);
@@ -84,6 +89,19 @@ export default function App() {
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
+  // Listen to scroll events to show/hide Floating Back to Top button
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 300) {
+        setShowScrollTop(true);
+      } else {
+        setShowScrollTop(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const handleOpenAdmin = () => {
     if (adminToken) {
       setIsDashboardOpen(true);
@@ -120,6 +138,7 @@ export default function App() {
 
   return (
     <div className="site-wrapper">
+      {loading && <LoadingScreen onDone={() => setLoading(false)} />}
       {/* 1. Header & Navigation */}
       <Navbar
         lang={lang}
@@ -158,8 +177,8 @@ export default function App() {
           {/* Main Bento-Grid Sections */}
           <main className="main-content">
             <div className="container">
-              {/* Row 1: News, Events (Citizen Services Hub commented out) */}
-              <div className="row-three-col">
+              {/* Row 1: 3-Column Bento Grid: Recent News, Upcoming Events, Vision Card */}
+              <div className="row-three-col row-three-bento">
                 <NewsSection 
                   t={t} 
                   onSelectNews={setSelectedNews} 
@@ -170,12 +189,10 @@ export default function App() {
                   onSelectEvent={setSelectedEvent} 
                   dynamicEvents={eventsData} 
                 />
-                {/* Citizen Services Hub Field
-                <ServicesHub 
+                <VisionCard 
                   t={t} 
-                  onSelectService={setSelectedService} 
+                  onConnect={() => handleNavigateSection('contact')} 
                 />
-                */}
               </div>
 
               {/* Row 2: Constituency Field Works, Grievance Form, and Leadership Tribute */}
@@ -249,6 +266,16 @@ export default function App() {
         token={adminToken}
         onDataUpdated={fetchPortalData}
       />
+
+      {/* Floating Back to Top Action for Mobile & Desktop */}
+      <button
+        className={`floating-back-to-top ${showScrollTop ? 'visible' : ''}`}
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        aria-label="Scroll to top"
+        title="மேலே செல்ல (Scroll to Top)"
+      >
+        <ChevronUp size={22} strokeWidth={2.5} />
+      </button>
     </div>
   );
 }

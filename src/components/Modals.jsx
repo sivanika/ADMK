@@ -178,8 +178,19 @@ export function NewsModal({ news, onClose, lang }) {
         </div>
 
         <div className="modal-body">
-          <div style={{ height: '220px', borderRadius: '8px', overflow: 'hidden', marginBottom: '14px', backgroundColor: '#e2e8f0' }}>
-            <img src={news.image} alt={news.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+          <div style={{ borderRadius: '10px', overflow: 'hidden', marginBottom: '14px', backgroundColor: '#e2e8f0', lineHeight: 0 }}>
+            <img
+              src={news.image}
+              alt={news.title}
+              style={{
+                width: '100%',
+                height: 'auto',
+                maxHeight: '70vh',
+                objectFit: 'contain',
+                display: 'block',
+                borderRadius: '10px'
+              }}
+            />
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.78rem', color: '#64748b', marginBottom: '8px' }}>

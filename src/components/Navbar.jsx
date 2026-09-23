@@ -1,17 +1,28 @@
-import React, { useState } from 'react';
-import { Search, Menu, X, ShieldCheck } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Search, Menu, X, ChevronRight, Sparkles, PhoneCall } from 'lucide-react';
 
 export default function Navbar({ lang, setLang, t, activeTab, setActiveTab, onOpenSearch, onOpenAdmin, isAdmin }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.classList.add('mobile-menu-active');
+    } else {
+      document.body.classList.remove('mobile-menu-active');
+    }
+    return () => {
+      document.body.classList.remove('mobile-menu-active');
+    };
+  }, [mobileMenuOpen]);
+
   const navItems = [
-    { id: 'home', label: t.nav.home },
-    { id: 'about', label: t.nav.about || 'வாழ்க்கை வரலாறு' },
-    { id: 'news', label: t.nav.news },
-    { id: 'events', label: t.nav.events },
-    { id: 'activities', label: t.nav.activities },
-    // { id: 'services', label: t.nav.services },
-    { id: 'contact', label: t.nav.contact }
+    { id: 'home', label: lang === 'ta' ? 'முகப்பு' : 'Home' },
+    { id: 'about', label: lang === 'ta' ? 'என்னை பற்றி' : 'About Me' },
+    { id: 'news', label: lang === 'ta' ? 'செய்திகள்' : 'News' },
+    { id: 'events', label: lang === 'ta' ? 'நிகழ்வுகள்' : 'Events' },
+    { id: 'projects', label: lang === 'ta' ? 'திட்டங்கள்' : 'Projects' },
+    { id: 'contact', label: lang === 'ta' ? 'மக்கள் தொடர்பு' : 'Contact' }
   ];
 
   const handleNavClick = (id) => {
@@ -25,9 +36,11 @@ export default function Navbar({ lang, setLang, t, activeTab, setActiveTab, onOp
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
         setTimeout(() => {
-          const element = document.getElementById(id);
+          let targetElId = id;
+          if (id === 'projects') targetElId = 'activities';
+          const element = document.getElementById(targetElId);
           if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }
         }, 80);
       }
@@ -35,149 +48,160 @@ export default function Navbar({ lang, setLang, t, activeTab, setActiveTab, onOp
   };
 
   return (
-    <header className="header-top">
-      <div className="header-container">
-        {/* Left: Brand Logo & Slogan */}
-        <div className="header-brand-group">
-          <a href="#home" className="brand-section" onClick={() => handleNavClick('home')}>
-            <div className="brand-logo">
-              <img src="/logo.png" alt="Party Emblem" />
+    <>
+      <header className="header-top">
+        <div className="header-container">
+          {/* Left: Two Leaves Brand Logo & Motto */}
+          <a 
+            href="#home" 
+            className="brand-section" 
+            onClick={(e) => { e.preventDefault(); handleNavClick('home'); }}
+          >
+            <div className="brand-logo-wrap">
+              <img src="/logo-leaf.svg" alt="Two Leaves Emblem" className="brand-leaf-icon" />
             </div>
-            <span className="brand-motto">{t.siteMotto}</span>
+            <div className="brand-text-block">
+              <span className="brand-line-1">மக்கள் நலனே</span>
+              <span className="brand-line-2">எங்கள் முதன்மை</span>
+            </div>
           </a>
 
-          {/* Vertical Divider separating Motto from Navigation */}
-          <div className="nav-vertical-divider" aria-hidden="true"></div>
+          {/* Center: Desktop Navigation Links */}
+          <nav className="desktop-nav-wrap" aria-label="Primary Navigation">
+            <ul className="nav-links">
+              {navItems.map((item) => {
+                const isActive = activeTab === item.id || (activeTab === 'home' && item.id === 'home');
+                return (
+                  <li key={item.id} className="nav-link-item">
+                    <a
+                      href={`#${item.id}`}
+                      className={`nav-link-btn ${isActive ? 'active' : ''}`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleNavClick(item.id);
+                      }}
+                    >
+                      <span>{item.label}</span>
+                      {isActive && <span className="nav-active-pill" />}
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
+
+          {/* Right: Actions (Search, Lang Switcher, Menu / Admin) */}
+          <div className="header-actions">
+            {/* Search Trigger */}
+            <button 
+              className="action-circle-btn header-search-btn" 
+              onClick={onOpenSearch} 
+              title={t.nav?.searchPlaceholder || 'தேடுக'}
+              aria-label="Search"
+            >
+              <Search size={18} strokeWidth={2} />
+            </button>
+
+            {/* Language Switcher Pill */}
+            <div className="lang-pill-container" role="radiogroup" aria-label="Language selection">
+              <button
+                className={`lang-pill-item ${lang === 'ta' ? 'active' : ''}`}
+                onClick={() => setLang('ta')}
+                title="தமிழ்"
+              >
+                தமிழ்
+              </button>
+              <button
+                className={`lang-pill-item ${lang === 'en' ? 'active' : ''}`}
+                onClick={() => setLang('en')}
+                title="English"
+              >
+                EN
+              </button>
+            </div>
+
+            {/* Menu Button matching responsive breakpoints */}
+            <button
+              className={`action-circle-btn header-menu-btn ${mobileMenuOpen ? 'open' : ''}`}
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label={mobileMenuOpen ? 'Close Menu' : 'Open Menu'}
+              aria-expanded={mobileMenuOpen}
+              title="மெனு"
+            >
+              {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
+          </div>
         </div>
 
-        {/* Center: Desktop Navigation Links */}
-        <nav className="desktop-nav-wrap">
-          <ul className="nav-links">
-            {navItems.map((item) => (
-              <li key={item.id} className="nav-link-item">
-                <a
-                  href={`#${item.id}`}
-                  className={activeTab === item.id ? 'active' : ''}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNavClick(item.id);
-                  }}
-                >
-                  {item.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        {/* Right: Actions (Language Switcher, Search, Admin Trigger, Mobile Hamburger) */}
-        <div className="header-actions">
-          {/* Language Toggle Pill */}
-          <div className="lang-switcher">
-            <button
-              className={`lang-btn ${lang === 'ta' ? 'active' : ''}`}
-              onClick={() => setLang('ta')}
-              title="தமிழ்"
+        {/* Mobile Slide-down Drawer */}
+        <div className={`mobile-nav-drawer ${mobileMenuOpen ? 'drawer-open' : ''}`}>
+          <div className="mobile-drawer-header">
+            <div className="drawer-title-group">
+              <span className="drawer-badge-dot"></span>
+              <span className="drawer-title">{lang === 'ta' ? 'வழிசெலுத்தல் மெனு' : 'Navigation Menu'}</span>
+            </div>
+            <button 
+              className="drawer-close-btn"
+              onClick={() => setMobileMenuOpen(false)}
+              aria-label="Close"
             >
-              தமிழ்
-            </button>
-            <button
-              className={`lang-btn ${lang === 'en' ? 'active' : ''}`}
-              onClick={() => setLang('en')}
-              title="English"
-            >
-              EN
+              <X size={18} />
             </button>
           </div>
 
-          {/* Search Trigger Button */}
-          <button 
-            className="search-icon-btn" 
-            onClick={onOpenSearch} 
-            title={t.nav.searchPlaceholder}
-            aria-label="Search"
-          >
-            <Search size={17} />
-          </button>
-
-          {/* Admin CMS Access Trigger */}
-          <button 
-            className="search-icon-btn admin-access-btn" 
-            onClick={onOpenAdmin} 
-            title={isAdmin ? "நிர்வாக பலகை (Admin CMS)" : "நிர்வாகி உள்நுழைவு (Admin Login)"}
-            aria-label="Admin Portal"
-            style={{ position: 'relative' }}
-          >
-            <ShieldCheck size={18} color={isAdmin ? '#15803d' : '#9e1b25'} />
-            {isAdmin && (
-              <span 
-                style={{
-                  position: 'absolute',
-                  top: '4px',
-                  right: '4px',
-                  width: '7px',
-                  height: '7px',
-                  background: '#15803d',
-                  borderRadius: '50%',
-                  border: '1px solid #fff'
-                }} 
-              />
-            )}
-          </button>
-
-          {/* Mobile Menu Toggle Button */}
-          <button
-            className="mobile-menu-toggle"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle Navigation Menu"
-          >
-            {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile Drawer */}
-      {mobileMenuOpen && (
-        <div className="mobile-nav-drawer">
           <ul className="mobile-nav-list">
-            {navItems.map((item) => (
-              <li key={item.id}>
-                <a
-                  href={`#${item.id}`}
-                  className={activeTab === item.id ? 'active' : ''}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNavClick(item.id);
-                  }}
-                >
-                  {item.label}
-                </a>
-              </li>
-            ))}
-            <li style={{ borderTop: '1px solid #e2e8f0', paddingTop: '10px', marginTop: '6px' }}>
-              <button 
-                onClick={() => { setMobileMenuOpen(false); onOpenAdmin(); }}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  width: '100%',
-                  padding: '10px 14px',
-                  background: '#fef2f2',
-                  color: '#9e1b25',
-                  borderRadius: '8px',
-                  border: '1px solid #fecaca',
-                  fontSize: '0.9rem',
-                  fontWeight: '700'
-                }}
-              >
-                <ShieldCheck size={18} />
-                <span>{isAdmin ? 'நிர்வாக பலகை (Admin CMS)' : 'நிர்வாகி உள்நுழைவு (Admin Login)'}</span>
-              </button>
-            </li>
+            {navItems.map((item) => {
+              const isActive = activeTab === item.id || (activeTab === 'home' && item.id === 'home');
+              return (
+                <li key={item.id} className="mobile-nav-item">
+                  <a
+                    href={`#${item.id}`}
+                    className={`mobile-nav-link ${isActive ? 'active' : ''}`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleNavClick(item.id);
+                    }}
+                  >
+                    <span className="mobile-nav-text">{item.label}</span>
+                    <ChevronRight size={16} className="mobile-nav-chevron" />
+                  </a>
+                </li>
+              );
+            })}
           </ul>
+
+          {/* Drawer Quick Action Footer */}
+          <div className="mobile-drawer-footer">
+            <button 
+              className="drawer-action-btn search-action"
+              onClick={() => {
+                setMobileMenuOpen(false);
+                onOpenSearch();
+              }}
+            >
+              <Search size={16} />
+              <span>{t.nav?.searchPlaceholder || 'தேடுக (Search)'}</span>
+            </button>
+
+            <button 
+              className="drawer-action-btn contact-action"
+              onClick={() => handleNavClick('contact')}
+            >
+              <PhoneCall size={16} />
+              <span>{t.nav?.contact || 'மக்கள் தொடர்பு'}</span>
+            </button>
+          </div>
         </div>
+      </header>
+
+      {/* Backdrop for closing mobile menu on outside tap */}
+      {mobileMenuOpen && (
+        <div 
+          className="mobile-nav-backdrop" 
+          onClick={() => setMobileMenuOpen(false)} 
+          aria-hidden="true" 
+        />
       )}
-    </header>
+    </>
   );
 }
