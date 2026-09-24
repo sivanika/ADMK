@@ -1399,7 +1399,50 @@ body.mobile-menu-active {
   }
 }
 
+/* ==========================================================================
+   2ND HERO SECTION: CAMPAIGN BANNER ONLY
+   ========================================================================== */
+.trichy-banner-hero-section {
+  background: #fafbfa;
+  padding: 0 0 32px;
+  position: relative;
+}
 
+@media (max-width: 768px) {
+  .trichy-banner-hero-section {
+    padding: 0 0 20px;
+  }
+}
+
+.trichy-banner-frame {
+  width: 100%;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  border: 1px solid #edf3eb;
+  background: #0f172a;
+  line-height: 0;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .trichy-banner-frame {
+    border-radius: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .trichy-banner-frame {
+    border-radius: 14px;
+  }
+}
+
+.trichy-banner-hero-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
 
 /* ==========================================================================
    3-COLUMN BENTO GRID: RECENT NEWS, UPCOMING EVENTS & VISION CARD

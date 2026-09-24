@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { ChevronUp } from 'lucide-react';
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
+// import Hero from './components/Hero';
+import TrichyRisesHero from './components/TrichyRisesHero';
 import AboutSection from './components/AboutSection';
 import NewsSection from './components/NewsSection';
 import EventsSection from './components/EventsSection';
@@ -166,13 +167,16 @@ export default function App() {
         /* Home Tab with Hero, Bento Grid & Citizen Modules */
         <>
           {/* Hero Section with Leader & Assembly Backdrop */}
-          <Hero 
+          {/* <Hero 
             t={t} 
             onExploreAbout={() => {
               setActiveTab('about');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-          />
+          /> */}
+
+          {/* 2nd Hero Section: Campaign Banner Only */}
+          <TrichyRisesHero />
 
           {/* Main Bento-Grid Sections */}
           <main className="main-content">
