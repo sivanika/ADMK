@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { ChevronUp } from 'lucide-react';
 import Navbar from './components/Navbar';
 // import Hero from './components/Hero';
-import TrichyRisesHero from './components/TrichyRisesHero';
+import HeroSection from './components/Hero/HeroSection';
 import AboutSection from './components/AboutSection';
 import NewsSection from './components/NewsSection';
 import EventsSection from './components/EventsSection';
@@ -140,17 +140,19 @@ export default function App() {
   return (
     <div className="site-wrapper">
       {loading && <LoadingScreen onDone={() => setLoading(false)} />}
-      {/* 1. Header & Navigation */}
-      <Navbar
-        lang={lang}
-        setLang={setLang}
-        t={t}
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
-        onOpenSearch={() => setSearchOpen(true)}
-        onOpenAdmin={handleOpenAdmin}
-        isAdmin={!!adminToken}
-      />
+      {/* 1. Header & Navigation (shown on About page or deep sub-pages) */}
+      {activeTab === 'about' && (
+        <Navbar
+          lang={lang}
+          setLang={setLang}
+          t={t}
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+          onOpenSearch={() => setSearchOpen(true)}
+          onOpenAdmin={handleOpenAdmin}
+          isAdmin={!!adminToken}
+        />
+      )}
 
       {/* 2. Main Page Content: Dedicated 'About Him' Tab OR Home Portal */}
       {activeTab === 'about' ? (
@@ -164,19 +166,20 @@ export default function App() {
           onNavigateSection={handleNavigateSection}
         />
       ) : (
-        /* Home Tab with Hero, Bento Grid & Citizen Modules */
+        /* Home Tab with Cinematic Hero, Bento Grid & Citizen Modules */
         <>
-          {/* Hero Section with Leader & Assembly Backdrop */}
-          {/* <Hero 
-            t={t} 
+          {/* Cinematic Hero Section */}
+          <HeroSection 
+            t={t}
+            lang={lang}
+            setLang={setLang}
+            onOpenSearch={() => setSearchOpen(true)}
+            onNavigateSection={handleNavigateSection}
             onExploreAbout={() => {
               setActiveTab('about');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-          /> */}
-
-          {/* 2nd Hero Section: Campaign Banner Only */}
-          <TrichyRisesHero />
+          />
 
           {/* Main Bento-Grid Sections */}
           <main className="main-content">
@@ -199,13 +202,17 @@ export default function App() {
                 />
               </div>
 
-              {/* Row 2: Constituency Field Works, Grievance Form, and Leadership Tribute */}
-              <div className="row-second">
+              {/* Row 2: Field Activities - Full Width */}
+              <div className="row-field-activities">
                 <GallerySection 
                   t={t} 
                   onSelectPhoto={setSelectedPhoto} 
                   dynamicActivities={activitiesData} 
                 />
+              </div>
+
+              {/* Row 3: Citizen Grievance & Amma Tribute / Social Media */}
+              <div className="row-grievance-social">
                 <GrievanceForm t={t} />
                 <LeadershipCard
                   t={t}

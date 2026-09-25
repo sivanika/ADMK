@@ -21,7 +21,7 @@ export default function Footer({ t, onNavClick, onOpenAdmin, isAdmin }) {
         {/* Center: Inspirational Slogan */}
         <div className="footer-ribbon-motto">
           <p className="footer-motto-quote">
-            “செயலால் நம்பிக்கை, சேவையால் மாற்றம்.”
+            {t.footerMotto || '“செயலால் நம்பிக்கை, சேவையால் மாற்றம்.”'}
           </p>
         </div>
 

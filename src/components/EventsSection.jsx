@@ -32,7 +32,9 @@ export default function EventsSection({ t, onSelectEvent, dynamicEvents }) {
     }
   ];
 
-  const items = (dynamicEvents && dynamicEvents.length > 0) ? dynamicEvents : defaultEvents;
+  const items = (dynamicEvents && dynamicEvents.length > 0) 
+    ? dynamicEvents 
+    : (t?.events?.items && t.events.items.length > 0 ? t.events.items : defaultEvents);
 
   const badgeColors = [
     { bg: '#ef4444', dot: '#15803d' }, // Red (18)
@@ -46,13 +48,13 @@ export default function EventsSection({ t, onSelectEvent, dynamicEvents }) {
       <div className="section-column-header">
         <div className="header-title-flex">
           <span className="accent-bar-green"></span>
-          <h2 className="section-col-heading">{t.events?.title || 'வரவிருக்கும் நிகழ்வுகள்'}</h2>
+          <h2 className="section-col-heading">{t?.events?.title || 'வரவிருக்கும் நிகழ்வுகள்'}</h2>
         </div>
         <button 
           className="section-view-all-btn"
           onClick={() => onSelectEvent(items[0])}
         >
-          <span>அனைத்து நிகழ்வுகள்</span>
+          <span>{t?.events?.viewAll || 'அனைத்து நிகழ்வுகள்'}</span>
           <ArrowRight size={14} />
         </button>
       </div>
@@ -64,43 +66,42 @@ export default function EventsSection({ t, onSelectEvent, dynamicEvents }) {
           return (
             <div
               key={event._id || event.id || idx}
-              className="event-timeline-item"
+              className="event-card-item"
               onClick={() => onSelectEvent(event)}
               tabIndex={0}
               role="button"
               onKeyDown={(e) => { if (e.key === 'Enter') onSelectEvent(event); }}
             >
-              {/* Colored Date Box */}
+              {/* Left Date Block */}
               <div 
-                className="event-colored-date-box"
+                className="event-date-block"
                 style={{ backgroundColor: colorScheme.bg }}
               >
                 <span className="event-date-num">{event.day || '18'}</span>
                 <span className="event-date-lbl">{event.month || 'செப்'}</span>
               </div>
 
-              {/* Timeline Connector with Dot */}
-              <div className="event-timeline-indicator">
-                <span 
-                  className="event-timeline-dot" 
-                  style={{ backgroundColor: colorScheme.dot }}
-                />
-                {idx < 2 && <span className="event-timeline-stem" />}
-              </div>
+              {/* Event Information */}
+              <div className="event-details-block">
+                <div className="event-subinfo-line">
+                  <div className="event-meta-pill">
+                    <Clock size={11} className="meta-icon" />
+                    <span>{event.time}</span>
+                  </div>
+                  <div className="event-meta-pill loc-pill">
+                    <MapPin size={11} className="meta-icon" />
+                    <span className="event-loc-truncate">{event.location}</span>
+                  </div>
+                </div>
 
-              {/* Event Content Info */}
-              <div className="event-timeline-content">
-                <h3 className="event-timeline-title">
+                <h3 className="event-card-title">
                   {event.title}
                 </h3>
-                <div className="event-meta-row">
-                  <MapPin size={13} className="meta-icon" />
-                  <span className="meta-text">{event.location}</span>
-                </div>
-                <div className="event-meta-row" style={{ marginTop: '3px' }}>
-                  <Clock size={13} className="meta-icon" />
-                  <span className="meta-text">{event.time}</span>
-                </div>
+              </div>
+
+              {/* Action Circle Indicator */}
+              <div className="event-action-circle" style={{ color: colorScheme.dot }}>
+                <ArrowRight size={15} />
               </div>
             </div>
           );

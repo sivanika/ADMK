@@ -61,8 +61,8 @@ export default function Navbar({ lang, setLang, t, activeTab, setActiveTab, onOp
               <img src="/logo-leaf.svg" alt="Two Leaves Emblem" className="brand-leaf-icon" />
             </div>
             <div className="brand-text-block">
-              <span className="brand-line-1">மக்கள் நலனே</span>
-              <span className="brand-line-2">எங்கள் முதன்மை</span>
+              <span className="brand-line-1">{lang === 'ta' ? 'மக்கள் நலனே' : "People's Welfare"}</span>
+              <span className="brand-line-2">{lang === 'ta' ? 'எங்கள் முதன்மை' : "Our Priority"}</span>
             </div>
           </a>
 

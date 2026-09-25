@@ -29,7 +29,9 @@ export default function NewsSection({ t, onSelectNews, dynamicNews }) {
     }
   ];
 
-  const items = (dynamicNews && dynamicNews.length > 0) ? dynamicNews : defaultNews;
+  const items = (dynamicNews && dynamicNews.length > 0) 
+    ? dynamicNews 
+    : (t?.news?.items && t.news.items.length > 0 ? t.news.items : defaultNews);
   
   // First item is the featured card
   const [featuredIdx, setFeaturedIdx] = useState(0);
@@ -49,13 +51,13 @@ export default function NewsSection({ t, onSelectNews, dynamicNews }) {
       <div className="section-column-header">
         <div className="header-title-flex">
           <span className="accent-bar-green"></span>
-          <h2 className="section-col-heading">{t.news?.title || 'சமீபத்திய செய்திகள்'}</h2>
+          <h2 className="section-col-heading">{t?.news?.title || 'சமீபத்திய செய்திகள்'}</h2>
         </div>
         <button 
           className="section-view-all-btn"
           onClick={() => onSelectNews(featuredItem)}
         >
-          <span>அனைத்து செய்திகள்</span>
+          <span>{t?.news?.viewAll || 'அனைத்து செய்திகள்'}</span>
           <ArrowRight size={14} />
         </button>
       </div>
@@ -74,19 +76,19 @@ export default function NewsSection({ t, onSelectNews, dynamicNews }) {
           <img 
             src={featuredItem.image || '/assets/karthikeyan_speech.png'} 
             alt={featuredItem.title} 
-            className="featured-news-img"
+            className="featured-news-img" 
           />
 
           {/* Date Badge (Top Left) */}
           <div className="featured-date-badge">
             <span className="featured-date-day">{featuredItem.date ? featuredItem.date.split(' ')[0] : '16'}</span>
-            <span className="featured-date-month">{featuredItem.date ? `${featuredItem.date.split(' ')[1] || 'செப்'} ${featuredItem.date.split(' ')[2] || '2025'}` : 'செப் 2025'}</span>
+            <span className="featured-date-month">{featuredItem.date ? `${featuredItem.date.split(' ')[1] || ''} ${featuredItem.date.split(' ')[2] || ''}` : '2025'}</span>
           </div>
 
           {/* Bottom Dark Gradient Speech Banner */}
           <div className="featured-bottom-overlay">
             <p className="featured-quote-text">
-              “தலைமை ஒன்று... இலக்கு ஒன்று... கழக வெற்றியே நம் இலக்கு!”
+              {featuredItem.title}
             </p>
             <span className="featured-author-tag">
               - C. கார்த்திகேயன் B.E.
@@ -99,7 +101,7 @@ export default function NewsSection({ t, onSelectNews, dynamicNews }) {
               className="featured-next-circle-btn"
               onClick={handleNextFeatured}
               aria-label="Next featured news"
-              title="அடுத்த செய்தி"
+              title="Next News"
             >
               <ChevronRight size={18} />
             </button>

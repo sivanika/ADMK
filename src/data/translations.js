@@ -355,10 +355,181 @@ export const translations = {
       ]
     },
     leadership: {
-      quote: "“மக்கள் நலனே எங்கள் இலக்கு”",
+      quote: "“மக்களின் நலனே எங்கள் இலக்கு”",
+      ammaText: "அம்மா",
       leaderName: "புரட்சித்தலைவி அம்மா & கழக முன்னோடிகள்",
-      socialTitle: "சமூக வலைதள இணைப்பு"
+      socialTitle: "சமூக வலைதளங்களில் இணையுங்கள்"
     },
+    fieldActivities: {
+      tag: "களத்தில் நாம்",
+      titleLine1: "கள",
+      titleLine2: "ப்பணிகள்",
+      subtitle: "மக்களோடு களத்தில் — வலிமையான திருச்சி மாநகரத்திற்காக.",
+      viewAll: "அனைத்து செயல்பாடுகளும்",
+      items: [
+        {
+          id: 'act-1',
+          title: 'மூத்த குடிமக்களுக்கு நலத்திட்ட உதவிகள்',
+          subtitle: 'திருச்சி மாநகர் மாவட்டம்',
+          category: 'மக்கள் நலன்'
+        },
+        {
+          id: 'act-2',
+          title: 'கல்வி ஊக்கத்தொகை & பள்ளி ஆதரவு',
+          subtitle: 'திருச்சி மாநகர் மாவட்டம்',
+          category: 'கல்வி'
+        },
+        {
+          id: 'act-3',
+          title: 'வெள்ள நிவாரண பொருட்கள் வழங்கல்',
+          subtitle: 'நேரடி மக்கள் நல உதவி',
+          category: 'நிவாரணம்'
+        },
+        {
+          id: 'act-4',
+          title: 'பசுமை திருச்சி பெருவிழா',
+          subtitle: 'மரக்கன்றுகள் நடும் இயக்கம்',
+          category: 'சுற்றுச்சூழல்'
+        },
+        {
+          id: 'act-5',
+          title: 'உள்கட்டமைப்பு மற்றும் சாலை மேம்பாடு',
+          subtitle: 'சாலைகள், பாலங்கள் & இணைப்பு',
+          category: 'உள்கட்டமைப்பு'
+        },
+        {
+          id: 'act-6',
+          title: 'இலவச மருத்துவ முகாம்கள்',
+          subtitle: 'இலவச மருத்துவ ஆலோசனை & மருந்துகள்',
+          category: 'மருத்துவம்'
+        },
+        {
+          id: 'act-7',
+          title: 'மகளிர் சுயஉதவி & வாழ்வாதார மேம்பாடு',
+          subtitle: 'தொழிற்பயிற்சி & ஆதரவு',
+          category: 'மகளிர் மேம்பாடு'
+        },
+        {
+          id: 'act-8',
+          title: 'இளைஞர் சந்திப்பு மற்றும் கலந்துரையாடல்',
+          subtitle: 'இளைஞர்களுடன் ஆலோசனைக் கூட்டம்',
+          category: 'இளைஞர் நலம்'
+        },
+        {
+          id: 'act-9',
+          title: 'மாநகர வளர்ச்சித் திட்டங்கள்',
+          subtitle: 'சிறப்பான திருச்சி மாநகரத்திற்கு',
+          category: 'வளர்ச்சி'
+        }
+      ]
+    },
+    grievance: {
+      title: "உங்கள் கோரிக்கையை தெரிவிக்கவும்",
+      subtitle: "உங்கள் குறைகளை பகிர்ந்து வளமான திருச்சிக்கு வழிவகுக்கவும்.",
+      fullName: "முழு பெயர் *",
+      enterName: "உங்கள் பெயரை உள்ளிடவும்",
+      phoneNumber: "தொலைபேசி எண் *",
+      enterPhone: "தொலைபேசி எண்ணை உள்ளிடவும்",
+      category: "பிரிவு",
+      selectCategory: "பிரிவை தேர்வு செய்யவும்",
+      detailsLabel: "கோரிக்கை / குறைகள் விவரம்",
+      detailsPlaceholder: "உங்கள் தகவலை இங்கே தட்டச்சு செய்யவும்...",
+      submitBtn: "மனுவை சமர்ப்பிக்கவும்",
+      submittingBtn: "பதிவு செய்யப்படுகிறது...",
+      trackBtn: "நிலை அறிய",
+      backToForm: "படிவத்திற்கு திரும்ப",
+      trackPlaceholder: "கோரிக்கை கண்காணிப்பு எண் (எ.கா. TRY-2026-1024)",
+      trackAction: "தேடுக",
+      statusPrefix: "கள ஆய்வு நடைபெறுகிறது (Field Review in Progress)",
+      successTitle: "கோரிக்கை வெற்றிகரமாக பதிவு செய்யப்பட்டது!",
+      successDesc: "கண்காணிப்பு எண்",
+      successAction: "விரைவான கள நடவடிக்கை மேற்கொள்ளப்படும்.",
+      newRequest: "புதிய கோரிக்கை",
+      categories: [
+        "சாலை & உள்கட்டமைப்பு",
+        "துப்புரவு & சுகாதாரம்",
+        "குடிநீர் & வடிகால் வசதி",
+        "தெருவிளக்கு & மின்சாரம்",
+        "கல்வி & பள்ளிகள் உதவி",
+        "மருத்துவ முகாம்கள் & சிகிச்சை",
+        "மூத்த குடிமக்கள் நலன்",
+        "பொதுக் கோரிக்கைகள்"
+      ]
+    },
+    vision: {
+      tag: "நமது நோக்கம்",
+      quote: "“ஒவ்வொரு மனிதனுக்கும் சிறந்த நாளை.”",
+      cta: "மக்களுடன் இணைந்திடுங்கள்"
+    },
+    heroUI: {
+      eyebrow: "வளமான திருச்சி | ஒளிமயமான தமிழ்நாடு",
+      line1: "எழுச்சிமிகு திருச்சி",
+      line2With: " ",
+      line2Name: "கார்த்திகேயனுடன்",
+      pillars: ["மக்கள்", "நோக்கம்", "வளர்ச்சி"],
+      exploreProfile: "சுயவிவரம் காண்க",
+      viewInitiatives: "களப்பணிகள்",
+      exploreBtn: "ஆராய்க",
+      mottoLine1: "மக்கள் நலனே",
+      mottoLine2: "எங்கள் முதன்மை",
+      leaderMotto1: "கேட்கும் தலைவர்",
+      leaderMotto2: "செயல்படும் தலைவர்",
+      signature1: "நம்ம திருச்சி",
+      signature2: "நம்ம கார்த்திகேயன்",
+      nav: {
+        home: "முகப்பு",
+        profile: "சுயவிவரம்",
+        vision: "தொலைநோக்கு",
+        initiatives: "திட்டங்கள்",
+        updates: "செய்திகள்",
+        gallery: "களப்பணிகள்"
+      },
+      visionItems: [
+        {
+          id: 'cleaner',
+          title: 'தூய்மையான நகரம்',
+          desc: 'நவீன சுகாதாரம், பசுமை மண்டலங்கள் & நிலையான உள்கட்டமைப்பு.'
+        },
+        {
+          id: 'brighter',
+          title: 'பிரகாசமான எதிர்காலம்',
+          desc: 'தரமான இளைஞர் கல்வி, தொழில்நுட்பப் பயிற்சி & வணிக வளர்ச்சி.'
+        },
+        {
+          id: 'united',
+          title: 'ஒன்றிணைந்த மக்கள்',
+          desc: 'சமூக நலன், தீவிர மக்கள் ஆலோசனைகள் & சமூக நல்லிணக்கம்.'
+        },
+        {
+          id: 'proud',
+          title: 'பெருமைமிகு திருச்சி',
+          desc: 'பாரம்பரியத்தைப் போற்றி, உலகத்தரம் வாய்ந்த வசதிகளை உருவாக்குதல்.'
+        }
+      ],
+      highlights: [
+        {
+          id: 'people-first',
+          title: 'மக்கள் நலன்',
+          desc: 'கேட்போம். இணைவோம். செயல்படுவோம்.'
+        },
+        {
+          id: 'youth-first',
+          title: 'இளைஞர் சக்தி',
+          desc: 'வலிமையான நாளைய தினத்திற்கான வாய்ப்புகள்.'
+        },
+        {
+          id: 'every-citizen',
+          title: 'அனைத்து மக்களுக்கும்',
+          desc: 'அனைவருக்குமான உள்ளடக்கிய வளர்ச்சி.'
+        },
+        {
+          id: 'public-initiatives',
+          title: 'பொது நலப்பணிகள்',
+          desc: 'திட்டங்கள், முன்னுரிமைகள் மற்றும் வளர்ச்சி.'
+        }
+      ]
+    },
+    footerMotto: "“செயலால் நம்பிக்கை, சேவையால் மாற்றம்.”",
     footer: {
       leaderName: "C. கார்த்திகேயன் B.E.,",
       leaderRole: "மாவட்ட கழக செயலாளர் | முன்னாள் ஆவின் தலைவர் - திருச்சி மாநகர் மாவட்டம்",
@@ -728,9 +899,180 @@ export const translations = {
     },
     leadership: {
       quote: "“People's welfare is our goal”",
+      ammaText: "அம்மா",
       leaderName: "Puratchi Thalaivi Amma & Party Ideologues",
       socialTitle: "Connect on Social Media"
     },
+    fieldActivities: {
+      tag: "IN ACTION",
+      titleLine1: "Field",
+      titleLine2: "Activities",
+      subtitle: "On the ground, with the people — for a stronger Trichy.",
+      viewAll: "View All Activities",
+      items: [
+        {
+          id: 'act-1',
+          title: 'Welfare Assistance for Senior Citizens',
+          subtitle: 'Trichy District',
+          category: 'Welfare'
+        },
+        {
+          id: 'act-2',
+          title: 'Education Support Programs',
+          subtitle: 'Trichy District',
+          category: 'Education'
+        },
+        {
+          id: 'act-3',
+          title: 'Flood Relief Distribution',
+          subtitle: 'Direct welfare assistance',
+          category: 'Relief'
+        },
+        {
+          id: 'act-4',
+          title: 'Green Trichy Initiative',
+          subtitle: 'Tree plantation drive',
+          category: 'Environment'
+        },
+        {
+          id: 'act-5',
+          title: 'Infrastructure Development',
+          subtitle: 'Roads, bridges & connectivity',
+          category: 'Infrastructure'
+        },
+        {
+          id: 'act-6',
+          title: 'Health Camps',
+          subtitle: 'Free medical support',
+          category: 'Health'
+        },
+        {
+          id: 'act-7',
+          title: 'Women Empowerment',
+          subtitle: 'Skill training & support',
+          category: 'Empowerment'
+        },
+        {
+          id: 'act-8',
+          title: 'Youth Engagement',
+          subtitle: 'Meetings & discussions',
+          category: 'Youth'
+        },
+        {
+          id: 'act-9',
+          title: 'Development Projects',
+          subtitle: 'For a better Trichy',
+          category: 'Development'
+        }
+      ]
+    },
+    grievance: {
+      title: "Submit Your Request / Grievance",
+      subtitle: "Share your concerns and contribute to a better Trichy.",
+      fullName: "Full Name *",
+      enterName: "Enter your name",
+      phoneNumber: "Phone Number *",
+      enterPhone: "Enter your phone number",
+      category: "Category",
+      selectCategory: "Select category",
+      detailsLabel: "Your Request / Grievance Details",
+      detailsPlaceholder: "Type your message here...",
+      submitBtn: "Submit Grievance",
+      submittingBtn: "Submitting...",
+      trackBtn: "Track Grievance",
+      backToForm: "Back to Form",
+      trackPlaceholder: "Enter Grievance Tracking ID (e.g. TRY-2026-1024)",
+      trackAction: "Track",
+      statusPrefix: "Field Review in Progress",
+      successTitle: "Grievance Submitted Successfully!",
+      successDesc: "Tracking ID",
+      successAction: "Quick field action will be initiated.",
+      newRequest: "New Request",
+      categories: [
+        "Infrastructure & Roads",
+        "Sanitation & Cleanliness",
+        "Water Supply & Drainage",
+        "Street Lighting & Electricity",
+        "Education & Schools",
+        "Health & Medical Camps",
+        "Senior Citizens & Welfare",
+        "General Grievance"
+      ]
+    },
+    vision: {
+      tag: "OUR VISION",
+      quote: "“A brighter tomorrow for every citizen.”",
+      cta: "Connect With Citizens"
+    },
+    heroUI: {
+      eyebrow: "A STRONGER TRICHY | A BRIGHTER TAMIL NADU",
+      line1: "TRICHY RISES",
+      line2With: "WITH ",
+      line2Name: "KARTHIKEYAN",
+      pillars: ["PEOPLE", "PURPOSE", "PROGRESS"],
+      exploreProfile: "Explore Profile",
+      viewInitiatives: "View Initiatives",
+      exploreBtn: "Explore",
+      mottoLine1: "People's Welfare",
+      mottoLine2: "Our Priority",
+      leaderMotto1: "A LEADER WHO LISTENS",
+      leaderMotto2: "A LEADER WHO DELIVERS",
+      signature1: "Namma Trichy",
+      signature2: "Namma Karthikeyan",
+      nav: {
+        home: "Home",
+        profile: "Profile",
+        vision: "Vision",
+        initiatives: "Initiatives",
+        updates: "Updates",
+        gallery: "Gallery"
+      },
+      visionItems: [
+        {
+          id: 'cleaner',
+          title: 'A CLEANER CITY',
+          desc: 'Modern sanitation, green belts & sustainable urban infrastructure.'
+        },
+        {
+          id: 'brighter',
+          title: 'A BRIGHTER FUTURE',
+          desc: 'Quality youth education, tech skilling & thriving local commerce.'
+        },
+        {
+          id: 'united',
+          title: 'A UNITED PEOPLE',
+          desc: 'Community welfare, active citizen councils & social harmony.'
+        },
+        {
+          id: 'proud',
+          title: 'A PROUD TRICHY',
+          desc: 'Honoring heritage while building world-class civic amenities.'
+        }
+      ],
+      highlights: [
+        {
+          id: 'people-first',
+          title: 'PEOPLE FIRST',
+          desc: 'Listening. Engaging. Acting.'
+        },
+        {
+          id: 'youth-first',
+          title: 'YOUTH FIRST',
+          desc: 'Opportunities for a stronger tomorrow.'
+        },
+        {
+          id: 'every-citizen',
+          title: 'FOR EVERY CITIZEN',
+          desc: 'Inclusive growth for all.'
+        },
+        {
+          id: 'public-initiatives',
+          title: 'PUBLIC INITIATIVES',
+          desc: 'Projects, priorities and progress.'
+        }
+      ]
+    },
+    footerMotto: "“Trust through Action, Change through Service.”",
     footer: {
       leaderName: "C. Karthikeyan B.E.,",
       leaderRole: "District Party Secretary | Former Aavin Chairman - Trichy City District",

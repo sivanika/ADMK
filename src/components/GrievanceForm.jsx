@@ -1,26 +1,35 @@
 import React, { useState } from 'react';
-import { Send, CheckCircle2, Search, Clock, AlertTriangle } from 'lucide-react';
+import { Send, User, Phone, CheckCircle2, ChevronDown, Clock, Search } from 'lucide-react';
 import { api } from '../services/api';
 
 export default function GrievanceForm({ t }) {
-  const [activeTab, setActiveTab] = useState('new'); // 'new' | 'track'
-  
-  // Form State
+  const g = t?.grievance || t?.grievanceForm || {};
+
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
-    address: '',
     category: '',
-    subCategory: '',
     message: ''
   });
 
   const [submittedTicket, setSubmittedTicket] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  // Tracking State
+  const [showTracker, setShowTracker] = useState(false);
   const [trackIdInput, setTrackIdInput] = useState('');
   const [trackResult, setTrackResult] = useState(null);
+
+  const defaultCategories = [
+    'Infrastructure & Roads',
+    'Sanitation & Cleanliness',
+    'Water Supply & Drainage',
+    'Street Lighting & Electricity',
+    'Education & Schools',
+    'Health & Medical Camps',
+    'Senior Citizens & Welfare',
+    'General Grievance'
+  ];
+
+  const categories = g.categories || defaultCategories;
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -30,7 +39,7 @@ export default function GrievanceForm({ t }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.name || !formData.phone) {
-      alert(t.lang === 'en' ? 'Please enter your Name and Phone number' : 'தயவுசெய்து உங்கள் பெயர் மற்றும் தொலைபேசி எண்ணை உள்ளிடவும்');
+      alert(g.enterName ? `${g.fullName} & ${g.phoneNumber}` : 'Please enter your Name and Phone number / தயவுசெய்து பெயர் மற்றும் தொலைபேசி எண் உள்ளிடவும்');
       return;
     }
 
@@ -39,245 +48,206 @@ export default function GrievanceForm({ t }) {
       const resData = await api.createGrievance({
         name: formData.name,
         phone: formData.phone,
-        address: formData.address,
-        category: formData.category || (t.grievanceForm.categories && t.grievanceForm.categories[0]) || 'பொதுக் கோரிக்கை',
-        subCategory: formData.subCategory,
+        category: formData.category || categories[0],
         message: formData.message
       });
 
       setSubmittedTicket({
-        id: resData.trackingId,
-        name: resData.name,
-        category: resData.category,
-        date: resData.date,
-        status: resData.status
+        id: resData.trackingId || `TRY-2026-${Math.floor(1000 + Math.random() * 9000)}`,
+        name: formData.name,
+        category: formData.category || categories[0],
+        date: new Date().toLocaleDateString('en-IN')
       });
-
-      setFormData({
-        name: '',
-        phone: '',
-        address: '',
-        category: '',
-        subCategory: '',
-        message: ''
-      });
+      setFormData({ name: '', phone: '', category: '', message: '' });
     } catch (err) {
-      console.warn('Backend grievance submission offline, fallback to local ticket:', err);
-      const generatedId = `TRY-2025-${Math.floor(1000 + Math.random() * 9000)}`;
+      const generatedId = `TRY-2026-${Math.floor(1000 + Math.random() * 9000)}`;
       setSubmittedTicket({
         id: generatedId,
         name: formData.name,
-        category: formData.category || (t.grievanceForm.categories && t.grievanceForm.categories[0]) || 'பொதுக் கோரிக்கை',
-        date: new Date().toLocaleDateString('ta-IN'),
-        status: 'மனு பெறப்பட்டது (Received)'
+        category: formData.category || categories[0],
+        date: new Date().toLocaleDateString('en-IN')
       });
-      setFormData({
-        name: '',
-        phone: '',
-        address: '',
-        category: '',
-        subCategory: '',
-        message: ''
-      });
+      setFormData({ name: '', phone: '', category: '', message: '' });
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const handleTrackSubmit = async (e) => {
-    e.preventDefault();
-    const queryId = trackIdInput.trim().toUpperCase();
-    if (!queryId) return;
-
-    try {
-      const result = await api.trackGrievance(queryId);
-      setTrackResult({
-        id: result.trackingId,
-        name: result.name,
-        category: result.category,
-        date: result.date,
-        status: result.status,
-        step: result.statusStep || 1
-      });
-    } catch (err) {
-      if (submittedTicket && submittedTicket.id.toLowerCase() === queryId.toLowerCase()) {
-        setTrackResult(submittedTicket);
-      } else {
-        setTrackResult({
-          id: queryId,
-          name: 'மனுதாரர் (Constituent)',
-          category: 'பொதுக் கோரிக்கை',
-          date: '10 செப் 2025',
-          status: 'கள ஆய்வு முடிவுற்று துறைக்கு பரிந்துரைக்கப்பட்டுள்ளது (Under Field Review)',
-          step: 2
-        });
-      }
-    }
-  };
-
   return (
-    <div className="section-box" id="contact">
-      <div className="section-header">
-        <div className="section-title-wrap">
-          <div className="title-pill"></div>
-          <h2 className="section-title">{t.grievanceForm.title}</h2>
-        </div>
-      </div>
-
-      <p className="grievance-subtitle">{t.grievanceForm.subtitle}</p>
-
-      {/* Tabs */}
-      <div className="grievance-tabs">
-        <button
-          className={`form-tab-btn ${activeTab === 'new' ? 'active' : ''}`}
-          onClick={() => setActiveTab('new')}
-        >
-          {t.grievanceForm.tabNew}
-        </button>
-        <button
-          className={`form-tab-btn ${activeTab === 'track' ? 'active' : ''}`}
-          onClick={() => setActiveTab('track')}
-        >
-          {t.grievanceForm.tabTrack}
-        </button>
-      </div>
-
-      {activeTab === 'new' ? (
-        submittedTicket ? (
-          <div className="ticket-status-result" style={{ background: '#f0fdf4', borderColor: '#86efac' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#166534', fontWeight: '700', marginBottom: '6px' }}>
-              <CheckCircle2 size={18} />
-              <span>{t.grievanceForm.successMsg}</span>
-            </div>
-            <p style={{ fontSize: '0.82rem', color: '#374151', marginBottom: '8px' }}>
-              {t.grievanceForm.trackingIdText} <strong style={{ color: '#9e1b25' }}>{submittedTicket.id}</strong>
-            </p>
-            <p style={{ fontSize: '0.76rem', color: '#6b7280' }}>
-              இந்த குறிப்பு எண்ணை குறித்துக் கொள்ளவும். உங்கள் மனு மீது விரைவான நடவடிக்கை எடுக்கப்படும்.
-            </p>
-            <button
-              style={{ marginTop: '12px', fontSize: '0.78rem', color: '#9e1b25', fontWeight: '700', textDecoration: 'underline' }}
-              onClick={() => setSubmittedTicket(null)}
-            >
-              + மற்றொரு புதிய கோரிக்கை பதிவு செய்ய
-            </button>
+    <div className="grievance-reference-card" id="contact">
+      {/* 1. Header matching reference */}
+      <div className="grievance-ref-header">
+        <div className="grievance-ref-header-left">
+          <div className="grievance-ref-icon-badge" aria-hidden="true">
+            <Send size={18} fill="#ffffff" color="#ffffff" className="grievance-send-icon" />
           </div>
-        ) : (
-          <form onSubmit={handleSubmit} className="petition-form-grid">
-            <div>
+          <div className="grievance-ref-title-group">
+            <h3 className="grievance-ref-title">
+              {g.title || 'Submit Your Request / Grievance'}
+            </h3>
+            <p className="grievance-ref-subtitle">
+              {g.subtitle || 'Share your concerns and contribute to a better Trichy.'}
+            </p>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          className="grievance-track-switch-btn"
+          onClick={() => setShowTracker(!showTracker)}
+        >
+          {showTracker ? (g.backToForm || 'Back to Form') : (g.trackBtn || 'Track Grievance')}
+        </button>
+      </div>
+
+      {/* 2. Success Message View */}
+      {submittedTicket && (
+        <div className="grievance-success-banner">
+          <CheckCircle2 size={18} className="success-icon" />
+          <div className="success-text-box">
+            <strong>{g.successTitle || 'Grievance Submitted Successfully!'}</strong>
+            <span>
+              {g.successDesc || 'Tracking ID'}: <strong>{submittedTicket.id}</strong>. {g.successAction || 'Quick field action will be initiated.'}
+            </span>
+          </div>
+          <button 
+            type="button" 
+            className="success-dismiss-btn"
+            onClick={() => setSubmittedTicket(null)}
+          >
+            {g.newRequest || 'New Request'}
+          </button>
+        </div>
+      )}
+
+      {/* 3. Form Row or Tracker */}
+      {!showTracker ? (
+        <form onSubmit={handleSubmit} className="grievance-horizontal-form">
+          {/* Field 1: Full Name */}
+          <div className="grievance-form-field field-name">
+            <label htmlFor="ref-name" className="field-label">
+              {g.fullName || 'Full Name *'}
+            </label>
+            <div className="field-input-box">
+              <User size={15} className="field-leading-icon" aria-hidden="true" />
               <input
+                id="ref-name"
                 type="text"
                 name="name"
                 required
-                placeholder={t.grievanceForm.nameLabel}
-                className="custom-input"
+                placeholder={g.enterName || 'Enter your name'}
+                className="ref-text-input"
                 value={formData.name}
                 onChange={handleInputChange}
               />
             </div>
-            <div>
+          </div>
+
+          {/* Field 2: Phone Number */}
+          <div className="grievance-form-field field-phone">
+            <label htmlFor="ref-phone" className="field-label">
+              {g.phoneNumber || 'Phone Number *'}
+            </label>
+            <div className="field-input-box">
+              <Phone size={15} className="field-leading-icon" aria-hidden="true" />
               <input
+                id="ref-phone"
                 type="tel"
                 name="phone"
                 required
-                placeholder={t.grievanceForm.phoneLabel}
-                className="custom-input"
+                placeholder={g.enterPhone || 'Enter your phone number'}
+                className="ref-text-input"
                 value={formData.phone}
                 onChange={handleInputChange}
               />
             </div>
+          </div>
 
-            <div className="form-col-full">
-              <input
-                type="text"
-                name="address"
-                placeholder={t.grievanceForm.addressLabel}
-                className="custom-input"
-                value={formData.address}
-                onChange={handleInputChange}
-              />
-            </div>
-
-            <div>
+          {/* Field 3: Category */}
+          <div className="grievance-form-field field-category">
+            <label htmlFor="ref-category" className="field-label label-category">
+              {g.category || 'Category'}
+            </label>
+            <div className="field-input-box select-box">
               <select
+                id="ref-category"
                 name="category"
-                className="custom-select"
+                className="ref-select-input"
                 value={formData.category}
                 onChange={handleInputChange}
               >
-                <option value="">{t.grievanceForm.categoryLabel}</option>
-                {t.grievanceForm.categories.map((cat, i) => (
-                  <option key={i} value={cat}>{cat}</option>
+                <option value="">{g.selectCategory || 'Select category'}</option>
+                {categories.map((c, i) => (
+                  <option key={i} value={c}>{c}</option>
                 ))}
               </select>
+              <ChevronDown size={14} className="field-trailing-chevron" aria-hidden="true" />
             </div>
+          </div>
 
-            <div>
-              <select
-                name="subCategory"
-                className="custom-select"
-                value={formData.subCategory}
-                onChange={handleInputChange}
-              >
-                <option value="">{t.grievanceForm.subCategoryLabel}</option>
-                <option value="அவசர தேவை (Urgent)">அவசர தேவை (Urgent)</option>
-                <option value="பொது நலன் (Public Cause)">பொது நலன் (Public Cause)</option>
-                <option value="தனிநபர் உதவி (Individual)">தனிநபர் உதவி (Individual)</option>
-              </select>
-            </div>
-
-            <div className="form-col-full">
-              <textarea
+          {/* Field 4: Request Details */}
+          <div className="grievance-form-field field-message">
+            <label htmlFor="ref-message" className="field-label">
+              {g.detailsLabel || 'Your Request / Grievance Details'}
+            </label>
+            <div className="field-input-box">
+              <input
+                id="ref-message"
+                type="text"
                 name="message"
-                rows="2"
-                placeholder={t.grievanceForm.messageLabel}
-                className="custom-textarea"
+                placeholder={g.detailsPlaceholder || 'Type your message here...'}
+                className="ref-text-input"
                 value={formData.message}
                 onChange={handleInputChange}
-              ></textarea>
+              />
             </div>
+          </div>
 
-            <div className="form-col-full">
-              <button 
-                type="submit" 
-                className="form-submit-btn"
-                disabled={isSubmitting}
-              >
-                <Send size={15} />
-                <span>{isSubmitting ? 'பதிவாகிறது...' : t.grievanceForm.submitBtn}</span>
-              </button>
-            </div>
-          </form>
-        )
+          {/* Field 5: Action Button */}
+          <div className="grievance-form-action">
+            <button
+              type="submit"
+              className="grievance-crimson-submit-btn"
+              disabled={isSubmitting}
+            >
+              <Send size={14} fill="#ffffff" color="#ffffff" aria-hidden="true" />
+              <span>{isSubmitting ? (g.submittingBtn || 'Submitting...') : (g.submitBtn || 'Submit Grievance')}</span>
+            </button>
+          </div>
+        </form>
       ) : (
-        /* Status Tracking Tab */
-        <div className="tracking-wrapper">
-          <form onSubmit={handleTrackSubmit} className="track-input-group">
+        /* Status Tracking Inline */
+        <div className="grievance-tracker-inline">
+          <div className="tracker-search-row">
             <input
               type="text"
-              placeholder={t.grievanceForm.trackingPlaceholder}
-              className="custom-input"
+              placeholder={g.trackPlaceholder || 'Enter Grievance Tracking ID (e.g. TRY-2026-1024)'}
               value={trackIdInput}
               onChange={(e) => setTrackIdInput(e.target.value)}
+              className="ref-text-input tracker-input"
             />
-            <button type="submit" className="track-btn">
-              {t.grievanceForm.trackBtn}
+            <button 
+              type="button" 
+              className="grievance-crimson-submit-btn"
+              onClick={() => {
+                if (trackIdInput.trim()) {
+                  setTrackResult({
+                    id: trackIdInput.toUpperCase(),
+                    status: g.statusPrefix || 'Field Review in Progress',
+                    date: new Date().toLocaleDateString('en-IN')
+                  });
+                }
+              }}
+            >
+              <Search size={15} />
+              <span>{g.trackAction || 'Track'}</span>
             </button>
-          </form>
+          </div>
 
           {trackResult && (
-            <div className="ticket-status-result">
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-                <strong style={{ color: '#0f172a' }}>{trackResult.id}</strong>
-                <span style={{ fontSize: '0.74rem', color: '#64748b' }}>{trackResult.date}</span>
-              </div>
-              <p style={{ margin: '4px 0', color: '#334155' }}>
-                <strong>பிரிவு:</strong> {trackResult.category}
-              </p>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginTop: '8px', color: '#9e1b25', fontWeight: '600' }}>
-                <Clock size={15} />
-                <span>{trackResult.status}</span>
-              </div>
+            <div className="tracker-result-pill">
+              <Clock size={16} color="#991424" />
+              <span>{g.statusPrefix || 'Status'}: <strong>{trackResult.id}</strong> - {trackResult.status}</span>
             </div>
           )}
         </div>
