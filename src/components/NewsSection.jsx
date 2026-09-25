@@ -37,8 +37,8 @@ export default function NewsSection({ t, onSelectNews, dynamicNews }) {
   const [featuredIdx, setFeaturedIdx] = useState(0);
   const featuredItem = items[featuredIdx] || items[0];
 
-  // The 3 right items
-  const displayList = items.filter((_, idx) => idx !== featuredIdx).slice(0, 3);
+  // The right list items (all except featured, up to 5)
+  const displayList = items.filter((_, idx) => idx !== featuredIdx).slice(0, 5);
 
   const handleNextFeatured = (e) => {
     e.stopPropagation();
@@ -137,6 +137,9 @@ export default function NewsSection({ t, onSelectNews, dynamicNews }) {
                 <h4 className="news-mini-title">
                   {item.title}
                 </h4>
+                {item.summary && (
+                  <p className="news-mini-summary">{item.summary}</p>
+                )}
               </div>
 
               {/* Circular Action Arrow */}

@@ -25,11 +25,14 @@ export default function HeroPortrait({ onExploreLeader, t, lang }) {
         title="Explore Profile - C. Karthikeyan"
       >
         <div className="hero-portrait-img-wrapper">
-          <img 
-            src="/assets/leader_namaste.jpg" 
-            alt="C. Karthikeyan with hands folded in greeting" 
-            className="hero-portrait-cutout-img"
-          />
+          <picture className="hero-portrait-picture">
+            <source media="(max-width: 768px)" srcSet="/assets/karthikeyan_cutout.png" />
+            <img 
+              src="/assets/karthikeyan_headshot1.jpg" 
+              alt="C. Karthikeyan" 
+              className="hero-portrait-cutout-img"
+            />
+          </picture>
         </div>
 
         {/* Soft interactive hover glow */}
